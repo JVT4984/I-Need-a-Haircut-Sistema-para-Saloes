@@ -21,13 +21,3 @@ let pessoa = await response.json();
 
 return pessoa;
 }
-    
-async function getPessoas() {
-    let response = await fetch("https://64f62ed72b07270f705e41cb.mockapi.io/pessoas-api/pessoa")
-    let pessoas = await response.json();
-
-    //console.log(pessoas);
-
-    return pessoas;
-
-}

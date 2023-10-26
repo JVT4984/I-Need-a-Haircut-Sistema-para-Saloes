@@ -21,7 +21,7 @@ function salvar(event) {
 
         // Desabilitar o botão de envio do formulário
         let submitButton = document.querySelector('button[type="submit"]');
-        submitButton.disabled = true;
+        //submitButton.disabled = true; COMENTARIO PARA TIRAR
 
         postPessoa(nome, sobrenome, email, senha, cidade, estado, cep).then(pessoa => {
             const modalSucesso = new bootstrap.Modal(document.getElementById('modalSucesso'), {})
@@ -29,7 +29,7 @@ function salvar(event) {
             spinner.style.display = "none";  // Ocultar o spinner
 
             // Habilitar o botão de envio do formulário
-            submitButton.disabled = false;
+            //submitButton.disabled = false; COMENTARIO PARA TIRAR
 
             // Limpar os campos do formulário
             document.getElementById("validationCustom01").value = "";
@@ -45,16 +45,4 @@ function salvar(event) {
 
 function Reload(){
     window.location.reload(true);
-}
-
-function login(email, senha) {
-    getPessoas().then(pessoas => {
-        for(let pessoa of pessoas) {
-            if(pessoa.email === email && pessoa.senha === senha) {
-                console.log("Acesso permitido"); // Acesso permitido
-                return;
-            }
-        }
-        console.log("Acesso negado"); // Acesso negado
-    });
 }
