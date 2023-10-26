@@ -1,0 +1,262 @@
+-- MySQL Workbench Forward Engineering
+
+SET @OLD_UNIQUE_CHECKS=@@UNIQUE_CHECKS, UNIQUE_CHECKS=0;
+SET @OLD_FOREIGN_KEY_CHECKS=@@FOREIGN_KEY_CHECKS, FOREIGN_KEY_CHECKS=0;
+SET @OLD_SQL_MODE=@@SQL_MODE, SQL_MODE='TRADITIONAL,ALLOW_INVALID_DATES';
+
+-- -----------------------------------------------------
+-- Schema mydb
+-- -----------------------------------------------------
+-- -----------------------------------------------------
+-- Schema aINeedaHaircut
+-- -----------------------------------------------------
+
+-- -----------------------------------------------------
+-- Schema aINeedaHaircut
+-- -----------------------------------------------------
+CREATE SCHEMA IF NOT EXISTS `aINeedaHaircut` ;
+USE `aINeedaHaircut` ;
+
+-- -----------------------------------------------------
+-- Table `aINeedaHaircut`.`estado`
+-- -----------------------------------------------------
+CREATE TABLE IF NOT EXISTS `aINeedaHaircut`.`estado` (
+  `estado_id` INT NOT NULL AUTO_INCREMENT,
+  `estado_nome` VARCHAR(75) NOT NULL,
+  `estado_codigo` VARCHAR(2) NOT NULL,
+  PRIMARY KEY (`estado_id`))
+ENGINE = InnoDB;
+
+
+-- -----------------------------------------------------
+-- Table `aINeedaHaircut`.`cidade`
+-- -----------------------------------------------------
+CREATE TABLE IF NOT EXISTS `aINeedaHaircut`.`cidade` (
+  `cidade_id` INT NOT NULL AUTO_INCREMENT,
+  `cidade_nome` VARCHAR(75) NOT NULL,
+  `estado_estado_id` INT NOT NULL,
+  PRIMARY KEY (`cidade_id`),
+  INDEX `fk_cidade_estado_idx` (`estado_estado_id` ASC),
+  CONSTRAINT `fk_cidade_estado`
+    FOREIGN KEY (`estado_estado_id`)
+    REFERENCES `aINeedaHaircut`.`estado` (`estado_id`)
+    ON DELETE NO ACTION
+    ON UPDATE NO ACTION)
+ENGINE = InnoDB;
+
+
+-- -----------------------------------------------------
+-- Table `aINeedaHaircut`.`endereco`
+-- -----------------------------------------------------
+CREATE TABLE IF NOT EXISTS `aINeedaHaircut`.`endereco` (
+  `endereco_id` INT NOT NULL AUTO_INCREMENT,
+  `endereco_bairro` VARCHAR(45) NOT NULL,
+  `endereco_rua` VARCHAR(45) NOT NULL,
+  `endereco_numero` INT(5) NOT NULL,
+  `endereco_complemento` VARCHAR(45) NOT NULL,
+  `cidade_cidade_id` INT NOT NULL,
+  PRIMARY KEY (`endereco_id`),
+  INDEX `fk_endereco_cidade1_idx` (`cidade_cidade_id` ASC),
+  CONSTRAINT `fk_endereco_cidade1`
+    FOREIGN KEY (`cidade_cidade_id`)
+    REFERENCES `aINeedaHaircut`.`cidade` (`cidade_id`)
+    ON DELETE NO ACTION
+    ON UPDATE NO ACTION)
+ENGINE = InnoDB;
+
+
+-- -----------------------------------------------------
+-- Table `aINeedaHaircut`.`salao`
+-- -----------------------------------------------------
+CREATE TABLE IF NOT EXISTS `aINeedaHaircut`.`salao` (
+  `salao_id` INT NOT NULL AUTO_INCREMENT,
+  `salao_nome` VARCHAR(100) NOT NULL,
+  `salao_cnpj` VARCHAR(14) NOT NULL,
+  `salao_telefone` VARCHAR(11) NOT NULL,
+  `salao_email` VARCHAR(100) NOT NULL,
+  `endereco_endereco_id` INT NOT NULL,
+  PRIMARY KEY (`salao_id`),
+  INDEX `fk_salao_endereco1_idx` (`endereco_endereco_id` ASC),
+  CONSTRAINT `fk_salao_endereco1`
+    FOREIGN KEY (`endereco_endereco_id`)
+    REFERENCES `aINeedaHaircut`.`endereco` (`endereco_id`)
+    ON DELETE NO ACTION
+    ON UPDATE NO ACTION)
+ENGINE = InnoDB;
+
+
+-- -----------------------------------------------------
+-- Table `aINeedaHaircut`.`cliente`
+-- -----------------------------------------------------
+CREATE TABLE IF NOT EXISTS `aINeedaHaircut`.`cliente` (
+  `cliente_id` INT NOT NULL AUTO_INCREMENT,
+  `cliente_nome` VARCHAR(75) NOT NULL,
+  `cliente_sobrenome` VARCHAR(75) NOT NULL,
+  `cliente_cpf` VARCHAR(11) NOT NULL,
+  `cliente_telefone` VARCHAR(11) NOT NULL,
+  `cliente_email` VARCHAR(100) NOT NULL,
+  `endereco_endereco_id` INT NOT NULL,
+  PRIMARY KEY (`cliente_id`),
+  INDEX `fk_cliente_endereco1_idx` (`endereco_endereco_id` ASC),
+  CONSTRAINT `fk_cliente_endereco1`
+    FOREIGN KEY (`endereco_endereco_id`)
+    REFERENCES `aINeedaHaircut`.`endereco` (`endereco_id`)
+    ON DELETE NO ACTION
+    ON UPDATE NO ACTION)
+ENGINE = InnoDB;
+
+
+-- -----------------------------------------------------
+-- Table `aINeedaHaircut`.`avaliacao`
+-- -----------------------------------------------------
+CREATE TABLE IF NOT EXISTS `aINeedaHaircut`.`avaliacao` (
+  `avaliacao_id` INT NOT NULL AUTO_INCREMENT,
+  `avaliacao` INT(1) NULL,
+  PRIMARY KEY (`avaliacao_id`))
+ENGINE = InnoDB;
+
+
+-- -----------------------------------------------------
+-- Table `aINeedaHaircut`.`status_serv`
+-- -----------------------------------------------------
+CREATE TABLE IF NOT EXISTS `aINeedaHaircut`.`status_serv` (
+  `status_serv_id` INT NOT NULL,
+  `descricao_status` VARCHAR(45) NOT NULL,
+  PRIMARY KEY (`status_serv_id`))
+ENGINE = InnoDB;
+
+
+-- -----------------------------------------------------
+-- Table `aINeedaHaircut`.`horarios`
+-- -----------------------------------------------------
+CREATE TABLE IF NOT EXISTS `aINeedaHaircut`.`horarios` (
+  `vaga_id` INT NOT NULL AUTO_INCREMENT,
+  `vaga_inicio` DATETIME NOT NULL,
+  `vaga_final` DATETIME NOT NULL,
+  `salao_salao_id` INT NOT NULL,
+  PRIMARY KEY (`vaga_id`),
+  INDEX `fk_horarios_salao1_idx` (`salao_salao_id` ASC),
+  CONSTRAINT `fk_horarios_salao1`
+    FOREIGN KEY (`salao_salao_id`)
+    REFERENCES `aINeedaHaircut`.`salao` (`salao_id`)
+    ON DELETE NO ACTION
+    ON UPDATE NO ACTION)
+ENGINE = InnoDB;
+
+
+-- -----------------------------------------------------
+-- Table `aINeedaHaircut`.`servico`
+-- -----------------------------------------------------
+CREATE TABLE IF NOT EXISTS `aINeedaHaircut`.`servico` (
+  `servico_id` INT NOT NULL AUTO_INCREMENT,
+  `servico_nome` VARCHAR(100) NOT NULL,
+  `tipo_servico` VARCHAR(75) NOT NULL,
+  `servico_tempo` TIME NOT NULL,
+  `servico_valor` DECIMAL(9,2) NOT NULL,
+  `salao_salao_id` INT NOT NULL,
+  PRIMARY KEY (`servico_id`, `salao_salao_id`),
+  INDEX `fk_servico_salao1_idx` (`salao_salao_id` ASC),
+  CONSTRAINT `fk_servico_salao1`
+    FOREIGN KEY (`salao_salao_id`)
+    REFERENCES `aINeedaHaircut`.`salao` (`salao_id`)
+    ON DELETE NO ACTION
+    ON UPDATE NO ACTION)
+ENGINE = InnoDB;
+
+
+-- -----------------------------------------------------
+-- Table `aINeedaHaircut`.`agdpedidodoservico`
+-- -----------------------------------------------------
+CREATE TABLE IF NOT EXISTS `aINeedaHaircut`.`agdpedidodoservico` (
+  `agendamento_id` INT NOT NULL AUTO_INCREMENT,
+  `horarios_vaga_id` INT NOT NULL,
+  `cliente_cliente_id` INT NOT NULL,
+  `avaliacao_avaliacao_id` INT NOT NULL,
+  `status_serv_status_serv_id` INT NOT NULL,
+  `servico_servico_id` INT NOT NULL,
+  PRIMARY KEY (`agendamento_id`, `horarios_vaga_id`),
+  INDEX `fk_agdpedidodoservico_horarios1_idx` (`horarios_vaga_id` ASC),
+  INDEX `fk_agdpedidodoservico_cliente1_idx` (`cliente_cliente_id` ASC),
+  INDEX `fk_agdpedidodoservico_avaliacao1_idx` (`avaliacao_avaliacao_id` ASC),
+  INDEX `fk_agdpedidodoservico_status_serv1_idx` (`status_serv_status_serv_id` ASC),
+  INDEX `fk_agdpedidodoservico_servico1_idx` (`servico_servico_id` ASC),
+  CONSTRAINT `fk_agdpedidodoservico_horarios1`
+    FOREIGN KEY (`horarios_vaga_id`)
+    REFERENCES `aINeedaHaircut`.`horarios` (`vaga_id`)
+    ON DELETE NO ACTION
+    ON UPDATE NO ACTION,
+  CONSTRAINT `fk_agdpedidodoservico_cliente1`
+    FOREIGN KEY (`cliente_cliente_id`)
+    REFERENCES `aINeedaHaircut`.`cliente` (`cliente_id`)
+    ON DELETE NO ACTION
+    ON UPDATE NO ACTION,
+  CONSTRAINT `fk_agdpedidodoservico_avaliacao1`
+    FOREIGN KEY (`avaliacao_avaliacao_id`)
+    REFERENCES `aINeedaHaircut`.`avaliacao` (`avaliacao_id`)
+    ON DELETE NO ACTION
+    ON UPDATE NO ACTION,
+  CONSTRAINT `fk_agdpedidodoservico_status_serv1`
+    FOREIGN KEY (`status_serv_status_serv_id`)
+    REFERENCES `aINeedaHaircut`.`status_serv` (`status_serv_id`)
+    ON DELETE NO ACTION
+    ON UPDATE NO ACTION,
+  CONSTRAINT `fk_agdpedidodoservico_servico1`
+    FOREIGN KEY (`servico_servico_id`)
+    REFERENCES `aINeedaHaircut`.`servico` (`servico_id`)
+    ON DELETE NO ACTION
+    ON UPDATE NO ACTION)
+ENGINE = InnoDB;
+
+
+SET SQL_MODE=@OLD_SQL_MODE;
+SET FOREIGN_KEY_CHECKS=@OLD_FOREIGN_KEY_CHECKS;
+SET UNIQUE_CHECKS=@OLD_UNIQUE_CHECKS;
+__________________________________________________________________________________________________________________
+Resumo do Banco de dados feito pela IA
+
+O banco de dados aINeedaHaircut é composto por nove tabelas: estado, cidade, endereco, salao, cliente, avaliacao, status_serv, horarios e servico, e agdpedidodoservico.
+
+A tabela estado contém informações sobre os estados, incluindo um ID único para cada estado (estado_id), o nome do estado (estado_nome) e o código do estado (estado_codigo).
+A tabela cidade armazena informações sobre as cidades, incluindo um ID único para cada cidade (cidade_id), o nome da cidade (cidade_nome) e uma chave estrangeira que referencia o ID do estado na tabela estado (estado_estado_id).
+A tabela endereco contém informações sobre os endereços, incluindo um ID único para cada endereço (endereco_id), o bairro (endereco_bairro), a rua (endereco_rua), o número da casa (endereco_numero), o complemento do endereço (endereco_complemento) e uma chave estrangeira que referencia o ID da cidade na tabela cidade (cidade_cidade_id).
+A tabela salao armazena informações sobre os salões, incluindo um ID único para cada salão (salao_id), o nome do salão (salao_nome), o CNPJ do salão (salao_cnpj), o telefone do salão (salao_telefone), o email do salão (salao_email) e uma chave estrangeira que referencia o ID do endereço na tabela endereco (endereco_endereco_id).
+A tabela cliente contém informações sobre os clientes, incluindo um ID único para cada cliente (cliente_id), o nome do cliente (cliente_nome), o sobrenome do cliente (cliente_sobrenome), o CPF do cliente (cliente_cpf), o telefone do cliente (cliente_telefone), o email do cliente (cliente_email) e uma chave estrangeira que referencia o ID do endereço na tabela endereco (endereco_endereco_id).
+A tabela avaliacao armazena as avaliações dos clientes, incluindo um ID único para cada avaliação (avaliacao_id) e a avaliação em si (avaliacao).
+A tabela status_serv contém os status dos serviços, incluindo um ID único para cada status de serviço (status_serv_id) e a descrição do status de serviço (descricao_status).
+A tabela horarios armazena os horários disponíveis para agendamento, incluindo um ID único para cada vaga de horário disponível (vaga_id), a data/hora de início da vaga de horário disponível (vaga_inicio), a data/hora de término da vaga de horário disponível (vaga_final) e uma chave estrangeira que referencia o ID do salão na tabela salao.
+A tabela servico contém informações sobre os serviços oferecidos pelos salões, incluindo um ID único para cada serviço oferecido pelo salão servico_id , o nome do serviço servico_nome , o tipo de serviço tipo_servico , a duração do serviço servico_tempo , o valor do serviço servico_valor e uma chave estrangeira que referencia o ID do salão na tabela salao.
+A tabela agdpedidodoservico é uma tabela de junção que relaciona todas as outras tabelas. Ela contém um ID único para cada agendamento ( agendamento_id ), bem como chaves estrangeiras que referenciam as tabelas horarios , cliente , avaliacao , status_serv , e servico.
+Espero que isso ajude! Se você tiver mais perguntas ou precisar de mais ajuda, por favor me avise! 
+__________________________________________________________________________________________________________________
+
+Códigos SQL TCC
+
+Inner Join tabela de agendamento com dados escritos
+{
+SELECT 
+    horarios.vaga_inicio, 
+    horarios.vaga_final, 
+    cliente.cliente_nome, 
+    cliente.cliente_sobrenome, 
+    avaliacao.avaliacao, 
+    status_serv.descricao_status, 
+    servico.servico_nome, 
+    servico.tipo_servico, 
+    servico.servico_tempo, 
+    servico.servico_valor,
+    salao.salao_nome
+FROM 
+    agdpedidodoservico
+INNER JOIN 
+    horarios ON agdpedidodoservico.horarios_vaga_id = horarios.vaga_id
+INNER JOIN 
+    cliente ON agdpedidodoservico.cliente_cliente_id = cliente.cliente_id
+INNER JOIN 
+    avaliacao ON agdpedidodoservico.avaliacao_avaliacao_id = avaliacao.avaliacao_id
+INNER JOIN 
+    status_serv ON agdpedidodoservico.status_serv_status_serv_id = status_serv.status_serv_id
+INNER JOIN 
+    servico ON agdpedidodoservico.servico_servico_id = servico.servico_id
+INNER JOIN 
+    salao ON servico.salao_salao_id = salao.salao_id;
+    }

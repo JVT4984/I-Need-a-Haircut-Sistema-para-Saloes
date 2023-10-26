@@ -1,0 +1,15 @@
+#spinner {
+    display: none;
+}
+
+#div {
+    background-color: rgb(230, 154, 236);
+}
+
+.obrigatorio {
+    color: red;
+}
+.bordasdiv {
+    border: 1px solid rgb(0, 0, 0);
+  border-radius: 5px;
+}
