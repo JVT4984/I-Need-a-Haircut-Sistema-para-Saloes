@@ -46,3 +46,44 @@ function salvar(event) {
 function Reload(){
     window.location.reload(true);
 }
+
+function salvarAgendamento() {
+
+    let nome = document.getElementById("cliente-agenda").value
+    let sobrenome = document.getElementById("servico-agenda").value
+    let email = ""
+    let cidade = document.getElementById("data-agenda").value;
+    let estado = document.getElementById("hora-agenda").value;
+    let senha = ""
+    let cep = ""
+
+     // Verificar se todos os campos estão preenchidos
+     if (!nome || !sobrenome || !cidade || !estado) {
+        const modalErro = new bootstrap.Modal(document.getElementById('modalErro'), {})
+            modalErro.show();
+        return;  // Não prosseguir se algum campo estiver vazio
+    } else {
+        let spinner = document.getElementById("spinner");
+        spinner.style.display = "inline-block";  // Exibir o spinner
+
+        // Desabilitar o botão de envio do formulário
+        let submitButton = document.querySelector('button[type="submit"]');
+        //submitButton.disabled = true; COMENTARIO PARA TIRAR
+
+        postPessoa(nome, sobrenome, email, senha, cidade, estado, cep).then(pessoa => {
+            const modalSucesso = new bootstrap.Modal(document.getElementById('modalSucesso'), {})
+            modalSucesso.show();
+            spinner.style.display = "none";  // Ocultar o spinner
+
+            // Habilitar o botão de envio do formulário
+            //submitButton.disabled = false; COMENTARIO PARA TIRAR
+
+            // Limpar os campos do formulário
+            document.getElementById("cliente-agenda").value = "";
+            document.getElementById("servico-agenda").value = "";
+            document.getElementById("data-agenda").value = "";
+            document.getElementById("hora-agenda").value = "";
+        })
+    }
+}
+
