@@ -12,9 +12,9 @@ public class ConnectionSingleton {
 
         if (connection == null) {
             connection = DriverManager.getConnection( //
-                    "jdbc:mysql://127.0.0.01:3307/atividadejava", //
+                    "jdbc:mysql://localhost:3306/banco_ineedahaircut_joao", //
                     "root", //
-                    "cedup123");
+                    "");
         }
 
         return connection;

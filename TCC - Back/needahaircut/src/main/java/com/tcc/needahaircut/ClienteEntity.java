@@ -1,6 +1,6 @@
 package com.tcc.needahaircut;
 
-public class ClienteDTO {
+public class ClienteEntity {
 
     public int cliente_id;
     public String cliente_nome;
@@ -10,7 +10,7 @@ public class ClienteDTO {
     public String cliente_email;
     public String cliente_senha;
 
-    public ClienteDTO(int cliente_id, String cliente_nome, String cliente_sobrenome, String cliente_cpf, String cliente_telefone, String cliente_email, String cliente_senha) {
+    public ClienteEntity(int cliente_id, String cliente_nome, String cliente_sobrenome, String cliente_cpf, String cliente_telefone, String cliente_email, String cliente_senha) {
         this.cliente_id = cliente_id;
         this.cliente_nome = cliente_nome;
         this.cliente_sobrenome = cliente_sobrenome;
@@ -19,6 +19,6 @@ public class ClienteDTO {
         this.cliente_email = cliente_email;
         this.cliente_senha = cliente_senha;
     }
-    public ClienteDTO(){
+    public ClienteEntity(){
     }
 }
