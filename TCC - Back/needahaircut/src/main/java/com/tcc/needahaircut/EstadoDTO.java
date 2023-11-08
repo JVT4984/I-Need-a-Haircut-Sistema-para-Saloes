@@ -34,4 +34,8 @@ public class EstadoDTO {
     public void setEstado_codigo(String estado_codigo) {
         this.estado_codigo = estado_codigo;
     }
+
+    public EstadoDTO(){
+
+    }
 }

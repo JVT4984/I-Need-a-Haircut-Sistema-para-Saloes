@@ -34,4 +34,8 @@ public class CidadeEntity {
     public void setEstado_estado_id(EstadoEntity estado_estado_id) {
         this.estado_estado_id = estado_estado_id;
     }
+
+    public CidadeEntity(){
+
+    }
 }

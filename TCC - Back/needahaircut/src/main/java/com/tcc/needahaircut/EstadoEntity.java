@@ -34,4 +34,8 @@ public class EstadoEntity {
     public void setEstado_codigo(String estado_codigo) {
         this.estado_codigo = estado_codigo;
     }
+
+    public EstadoEntity(){
+
+    }
 }

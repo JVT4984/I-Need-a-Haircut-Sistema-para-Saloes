@@ -64,4 +64,8 @@ public class EnderecoDTO {
     public void setCidade_cidade_id(CidadeEntity cidade_cidade_id) {
         this.cidade_cidade_id = cidade_cidade_id;
     }
+
+    public EnderecoDTO(){
+
+    }
 }
