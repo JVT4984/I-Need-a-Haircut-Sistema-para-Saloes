@@ -9,7 +9,7 @@ import java.util.List;
 public class SalaoController {
 
     @GetMapping("/salao/")
-    public List<SalaoDTO> getSalao() throws SQLException {
+    public List<SalaoEntity> getSalao() throws SQLException {
         return SalaoDAO.getSaloes();
     }
 
@@ -19,16 +19,16 @@ public class SalaoController {
         return salaoDTO;
     }
 
-    @GetMapping("/salao/{id}")
-    public SalaoDTO getSalaoByID(@PathVariable("id") int id) throws SQLException {
-        return SalaoDAO.getSalaoByID(id);
-    }
+  //  @GetMapping("/salao/{id}")
+ //   public SalaoDTO getSalaoByID(@PathVariable("id") int id) throws SQLException {
+  //      return SalaoDAO.getSalaoByID(id);
+  //  }
 
-    @DeleteMapping("/salao/{id}")
-    public SalaoDTO deletarSalao(@PathVariable("id") int id) throws SQLException {
-        SalaoDAO salaoDAO = new SalaoDAO();
-        SalaoDTO salao = SalaoDAO.getSalaoByID(id);
-        salaoDAO.deleteSalao(id);
-        return salao;
-    }
+ //   @DeleteMapping("/salao/{id}")
+  //  public SalaoDTO deletarSalao(@PathVariable("id") int id) throws SQLException {
+  //      SalaoDAO salaoDAO = new SalaoDAO();
+   //     SalaoDTO salao = SalaoDAO.getSalaoByID(id);
+   //     salaoDAO.deleteSalao(id);
+  //      return salao;
+  //  }
 }

@@ -3,12 +3,13 @@ package com.tcc.needahaircut;
 public class CidadeEntity {
     public int cidade_id;
     public String cidade_nome;
-    public EstadoEntity estado_estado_id;
+    public EstadoEntity estado_id;
 
-    public CidadeEntity(int cidade_id, String cidade_nome, EstadoEntity estado_estado_id) {
+    public CidadeEntity(int cidade_id, String cidade_nome, EstadoEntity estado_id) {
         this.cidade_id = cidade_id;
         this.cidade_nome = cidade_nome;
-        this.estado_estado_id = estado_estado_id;
+        this.estado_id = estado_id;
+
     }
 
     public int getCidade_id() {
@@ -27,12 +28,12 @@ public class CidadeEntity {
         this.cidade_nome = cidade_nome;
     }
 
-    public EstadoEntity getEstado_estado_id() {
-        return estado_estado_id;
+    public EstadoEntity getEstado_id() {
+        return estado_id;
     }
 
-    public void setEstado_estado_id(EstadoEntity estado_estado_id) {
-        this.estado_estado_id = estado_estado_id;
+    public void setEstado_id(EstadoEntity estado_id) {
+        this.estado_id = estado_id;
     }
 
     public CidadeEntity(){

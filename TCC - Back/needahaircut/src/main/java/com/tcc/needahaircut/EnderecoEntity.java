@@ -6,15 +6,15 @@ public class EnderecoEntity {
     public String endereco_rua;
     public String endereco_numero;
     public String endereco_complemento;
-    public CidadeEntity cidade_cidade_id;
+    public CidadeEntity cidadeEntity;
 
-    public EnderecoEntity(int endereco_id, String endereco_bairro, String endereco_rua, String endereco_numero, String endereco_complemento, CidadeEntity cidade_cidade_id) {
+    public EnderecoEntity(int endereco_id, String endereco_bairro, String endereco_rua, String endereco_numero, String endereco_complemento, CidadeEntity cidadeEntity) {
         this.endereco_id = endereco_id;
         this.endereco_bairro = endereco_bairro;
         this.endereco_rua = endereco_rua;
         this.endereco_numero = endereco_numero;
         this.endereco_complemento = endereco_complemento;
-        this.cidade_cidade_id = cidade_cidade_id;
+        this.cidadeEntity = cidadeEntity;
     }
 
     public int getEndereco_id() {
@@ -57,12 +57,12 @@ public class EnderecoEntity {
         this.endereco_complemento = endereco_complemento;
     }
 
-    public CidadeEntity getCidade_cidade_id() {
-        return cidade_cidade_id;
+    public CidadeEntity getCidadeEntity() {
+        return cidadeEntity;
     }
 
-    public void setCidade_cidade_id(CidadeEntity cidade_cidade_id) {
-        this.cidade_cidade_id = cidade_cidade_id;
+    public void setCidadeEntity(CidadeEntity cidadeEntity) {
+        this.cidadeEntity = cidadeEntity;
     }
 
     public EnderecoEntity(){
