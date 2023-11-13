@@ -35,7 +35,7 @@ public class SalaoDAO {
         }
     }
 
-    public static SalaoDTO postSalao(SalaoDTO salaoNovo) throws SQLException {
+    public static SalaoEntity postSalao(SalaoEntity salaoNovo) throws SQLException {
         String sql = "insert into salao (salao_nome, salao_cnpj, salao_telefone, salao_email, salao_senha, endereco_endereco_id) values (?, ?, ?, ?, ?, ?);";
         try (PreparedStatement preparedStatement = ConnectionSingleton.getConnection().prepareStatement(sql, Statement.RETURN_GENERATED_KEYS)){
             preparedStatement.setString(1, salaoNovo.salao_nome);
@@ -43,7 +43,7 @@ public class SalaoDAO {
             preparedStatement.setString(3, salaoNovo.salao_telefone);
             preparedStatement.setString(4, salaoNovo.salao_email);
             preparedStatement.setString(5, salaoNovo.salao_senha);
-            preparedStatement.setInt(6, salaoNovo.enderecoDTO.getEndereco_id());
+            preparedStatement.setInt(6, salaoNovo.endereco_id.getEndereco_id());
             preparedStatement.execute();
             try (ResultSet rs = preparedStatement.getGeneratedKeys()) {
                 rs.next();
@@ -51,6 +51,29 @@ public class SalaoDAO {
             }
         }
         return salaoNovo;
+    }
+
+    public SalaoEntity updateSalao(SalaoEntity entity, int id) {
+        final String sql = "UPDATE salao SET salao_nome = ?, salao_cnpj = ? , salao_telefone = ? , salao_email = ? , salao_senha = ? , endereco_endereco_id = ?  WHERE salao_id = ?";
+        try (final  PreparedStatement preparedStatement = ConnectionSingleton.getConnection().prepareStatement(sql)) {
+            preparedStatement.setString(1, entity.salao_nome);
+            preparedStatement.setString(2, entity.salao_cnpj);
+            preparedStatement.setString(3, entity.salao_telefone);
+            preparedStatement.setString(4, entity.salao_email);
+            preparedStatement.setString(5, entity.salao_senha);
+            preparedStatement.setInt(6, entity.endereco_id.getEndereco_id());
+            preparedStatement.setInt(7, id);
+            int linhasAlteradas = preparedStatement.executeUpdate();
+
+            if (linhasAlteradas == 0) {
+                return null;
+            }
+            entity.salao_id = id;
+            return entity;
+
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
     }
 
     //public static SalaoDTO getSalaoByID(int id) throws SQLException {

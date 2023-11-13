@@ -1,5 +1,6 @@
 package com.tcc.needahaircut;
 
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.sql.SQLException;
@@ -15,8 +16,18 @@ public class SalaoController {
 
     @PostMapping("/salao/")
     public SalaoDTO postSalao(@RequestBody SalaoDTO salaoDTO) throws SQLException {
-        new SalaoDAO().postSalao(salaoDTO);
+        new SalaoDAO().postSalao(new SalaoEntity());
         return salaoDTO;
+    }
+
+    @PutMapping("/salao/{id}")
+    public ResponseEntity<SalaoDTO> putCliente(@RequestBody SalaoDTO dto, @PathVariable int id) {
+        final SalaoConverter converter = new SalaoConverter();
+        SalaoEntity entity = new SalaoDAO().updateSalao(converter.toEntity(dto), id);
+        if (entity == null) {
+            return ResponseEntity.notFound().build();
+        }
+        return ResponseEntity.ok().body(converter.toDTO(entity));
     }
 
   //  @GetMapping("/salao/{id}")
