@@ -14,11 +14,11 @@ public class SalaoController {
         return SalaoDAO.getSaloes();
     }
 
-    @PostMapping("/salao/")
-    public SalaoDTO postSalao(@RequestBody SalaoDTO salaoDTO) throws SQLException {
-        new SalaoDAO().postSalao(new SalaoEntity());
-        return salaoDTO;
-    }
+   // @PostMapping("/salao/")
+   // public SalaoDTO postSalao(@RequestBody SalaoDTO salaoDTO) throws SQLException {
+    //    new SalaoDAO().postSalao(new SalaoEntity());
+   //     return salaoDTO;
+ //   }
 
     @PutMapping("/salao/{id}")
     public ResponseEntity<SalaoDTO> putCliente(@RequestBody SalaoDTO dto, @PathVariable int id) {
@@ -30,16 +30,22 @@ public class SalaoController {
         return ResponseEntity.ok().body(converter.toDTO(entity));
     }
 
-  //  @GetMapping("/salao/{id}")
- //   public SalaoDTO getSalaoByID(@PathVariable("id") int id) throws SQLException {
-  //      return SalaoDAO.getSalaoByID(id);
-  //  }
+    @GetMapping("/salao/{id}")
+    public ResponseEntity<SalaoDTO> getSalaoByID(@PathVariable int id) throws SQLException {
+        SalaoEntity entity = new SalaoDAO().getSalaoByID(id);
 
- //   @DeleteMapping("/salao/{id}")
+        if (entity == null) {
+            return ResponseEntity.notFound().build();
+        }
+
+        return ResponseEntity.ok().body(new SalaoConverter().toDTO(entity));
+    }
+
+   // @DeleteMapping("/salao/{id}")
   //  public SalaoDTO deletarSalao(@PathVariable("id") int id) throws SQLException {
-  //      SalaoDAO salaoDAO = new SalaoDAO();
+   //     SalaoDAO salaoDAO = new SalaoDAO();
    //     SalaoDTO salao = SalaoDAO.getSalaoByID(id);
-   //     salaoDAO.deleteSalao(id);
-  //      return salao;
+    //    salaoDAO.deleteSalao(id);
+    //    return salao;
   //  }
 }
