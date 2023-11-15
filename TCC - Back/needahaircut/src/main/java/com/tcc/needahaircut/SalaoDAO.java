@@ -27,7 +27,7 @@ public class SalaoDAO {
 
                     EnderecoEntity endereco = EnderecoDAO.getEnderecoById(endereco_id);
 
-                    salao.endereco_id = endereco;
+                    salao.endereco_endereco_id = endereco;
                     saloes.add(salao);
                 }
                 return saloes;
@@ -43,7 +43,7 @@ public class SalaoDAO {
             preparedStatement.setString(3, salaoNovo.salao_telefone);
             preparedStatement.setString(4, salaoNovo.salao_email);
             preparedStatement.setString(5, salaoNovo.salao_senha);
-            preparedStatement.setInt(6, salaoNovo.endereco_id.endereco_id);
+            preparedStatement.setInt(6, salaoNovo.endereco_endereco_id.endereco_id);
             preparedStatement.execute();
             try (ResultSet rs = preparedStatement.getGeneratedKeys()) {
                 rs.next();
@@ -62,7 +62,7 @@ public class SalaoDAO {
             preparedStatement.setString(3, entity.salao_telefone);
             preparedStatement.setString(4, entity.salao_email);
             preparedStatement.setString(5, entity.salao_senha);
-            preparedStatement.setInt(6, entity.endereco_id.);
+            preparedStatement.setInt(6, entity.endereco_endereco_id.endereco_id);
 
             preparedStatement.setInt(7, id);
             int linhasAlteradas = preparedStatement.executeUpdate();
@@ -103,7 +103,7 @@ public class SalaoDAO {
                     endereco.endereco_rua = rs.getString(8);
                     endereco.endereco_numero = rs.getString(9);
                     endereco.endereco_complemento = rs.getString(10);
-                    salao.setEndereco_id(endereco);
+                    salao.setEndereco_endereco_id(endereco);
                     endereco.setCidadeEntity(cidade);
                     cidade.setEstado_id(estado);
                     estado.setEstado_codigo(estado.getEstado_nome());

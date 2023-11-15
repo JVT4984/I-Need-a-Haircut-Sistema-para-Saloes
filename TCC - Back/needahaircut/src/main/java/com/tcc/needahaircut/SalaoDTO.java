@@ -8,7 +8,7 @@ public class SalaoDTO {
     public String salao_telefone;
     public String salao_email;
     public String salao_senha;
-    public EnderecoEntity enderecoEntity;
+    public int endereco_endereco_id;
 
     public int getSalao_id() {
         return salao_id;
@@ -58,22 +58,22 @@ public class SalaoDTO {
         this.salao_senha = salao_senha;
     }
 
-    public EnderecoEntity getEnderecoEntity() {
-        return enderecoEntity;
+    public int getEndereco_endereco_id() {
+        return endereco_endereco_id;
     }
 
-    public void setEnderecoEntity(EnderecoEntity enderecoEntity) {
-        this.enderecoEntity = enderecoEntity;
+    public void setEndereco_endereco_id(int endereco_endereco_id) {
+        this.endereco_endereco_id = endereco_endereco_id;
     }
 
-    public SalaoDTO(int salao_id, String salao_nome, String salao_cnpj, String salao_telefone, String salao_email, String salao_senha, EnderecoEntity enderecoEntity) {
+    public SalaoDTO(int salao_id, String salao_nome, String salao_cnpj, String salao_telefone, String salao_email, String salao_senha, int endereco_endereco_id) {
         this.salao_id = salao_id;
         this.salao_nome = salao_nome;
         this.salao_cnpj = salao_cnpj;
         this.salao_telefone = salao_telefone;
         this.salao_email = salao_email;
         this.salao_senha = salao_senha;
-        this.enderecoEntity = enderecoEntity;
+        this.endereco_endereco_id = endereco_endereco_id;
     }
 
     public SalaoDTO(){

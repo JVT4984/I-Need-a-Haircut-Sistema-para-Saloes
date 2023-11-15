@@ -8,7 +8,7 @@ public class SalaoEntity {
     public String salao_telefone;
     public String salao_email;
     public String salao_senha;
-    public EnderecoEntity endereco_id;
+    public EnderecoEntity endereco_endereco_id;
 
     public int getSalao_id() {
         return salao_id;
@@ -58,12 +58,12 @@ public class SalaoEntity {
         this.salao_senha = salao_senha;
     }
 
-    public EnderecoEntity getEndereco_id() {
-        return endereco_id;
+    public EnderecoEntity getEndereco_endereco_id() {
+        return endereco_endereco_id;
     }
 
-    public void setEndereco_id(EnderecoEntity endereco_id) {
-        this.endereco_id = endereco_id;
+    public void setEndereco_endereco_id(EnderecoEntity endereco_endereco_id) {
+        this.endereco_endereco_id = endereco_endereco_id;
     }
 
     public SalaoEntity(int salao_id, String salao_nome, String salao_cnpj, String salao_telefone, String salao_email, String salao_senha, EnderecoEntity salao_endereco) {
@@ -73,7 +73,7 @@ public class SalaoEntity {
         this.salao_telefone = salao_telefone;
         this.salao_email = salao_email;
         this.salao_senha = salao_senha;
-        this.endereco_id = salao_endereco;
+        this.endereco_endereco_id = salao_endereco;
     }
     public SalaoEntity(){
 

@@ -23,6 +23,7 @@ public class SalaoController {
     @PutMapping("/salao/{id}")
     public ResponseEntity<SalaoDTO> putCliente(@RequestBody SalaoDTO dto, @PathVariable int id) {
         final SalaoConverter converter = new SalaoConverter();
+
         SalaoEntity entity = new SalaoDAO().updateSalao(converter.toEntity(dto), id);
         if (entity == null) {
             return ResponseEntity.notFound().build();
