@@ -1,5 +1,7 @@
 package com.tcc.needahaircut;
 
+import org.springframework.core.convert.converter.Converter;
+
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -17,8 +19,10 @@ public class SalaoConverter {
 
         int id = dto.endereco_endereco_id;
 
+        EnderecoEntity endereco = new EnderecoEntity(id);
         // TODO converter
-        
+
+
 
         return new SalaoEntity(dto.salao_id, dto.salao_nome, dto.salao_cnpj, dto.salao_telefone, dto.salao_email, dto.salao_senha, id);
     }
