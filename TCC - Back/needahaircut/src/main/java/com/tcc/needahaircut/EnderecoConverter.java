@@ -9,7 +9,9 @@ public class EnderecoConverter {
     return entities.stream().map(entity -> new EnderecoDTO(entity.endereco_id, entity.endereco_bairro, entity.endereco_rua, entity.endereco_numero, entity.endereco_complemento, entity.cidadeEntity)).collect(Collectors.toList());
     }
 
-    public EnderecoDTO toDTOendereco(EnderecoEntity entity) {return new EnderecoDTO(entity.endereco_id, entity.endereco_bairro, entity.endereco_rua, entity.endereco_numero, entity.endereco_complemento, entity.cidadeEntity);}
+    public EnderecoDTO toDTOendereco(EnderecoEntity entity) {
+        return new EnderecoDTO(entity.endereco_id, entity.endereco_bairro, entity.endereco_rua, entity.endereco_numero, entity.endereco_complemento, entity.cidadeEntity);}
 
-    public EnderecoEntity toEntityEndereco(EnderecoDTO dto) {return new EnderecoEntity(dto.endereco_id, dto.endereco_bairro, dto.endereco_rua, dto.endereco_numero, dto.endereco_complemento, dto.cidadeEntity);}
+    public EnderecoEntity toEntityEndereco(EnderecoDTO dto) {
+        return new EnderecoEntity(dto.endereco_id, dto.endereco_bairro, dto.endereco_rua, dto.endereco_numero, dto.endereco_complemento, dto.cidade_cidade_id);}
 }

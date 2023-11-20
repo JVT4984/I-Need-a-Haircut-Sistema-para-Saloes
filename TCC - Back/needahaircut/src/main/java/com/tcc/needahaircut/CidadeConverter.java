@@ -9,7 +9,9 @@ public class CidadeConverter {
         return entityes.stream().map(entity -> new CidadeDTO(entity.cidade_id, entity.cidade_nome, entity.estado_id)).collect(Collectors.toList());
     }
 
-    public CidadeDTO toDTOcidade(CidadeEntity entity){return new CidadeDTO(entity.cidade_id, entity.cidade_nome, entity.estado_id);}
+    public CidadeDTO toDTOcidade(CidadeEntity entity){
+        return new CidadeDTO(entity.cidade_id, entity.cidade_nome, entity.estado_id);}
 
-    public CidadeEntity toEntityCidade(CidadeDTO dto){return new CidadeEntity(dto.cidade_id, dto.cidade_nome, dto.estadoEntity);}
+    public CidadeEntity toEntityCidade(CidadeDTO dto){
+        return new CidadeEntity(dto.cidade_id, dto.cidade_nome, dto.estado_estado_id);}
 }
