@@ -35,23 +35,23 @@ public class SalaoDAO {
         }
     }
 
-    public static SalaoEntity postSalao(SalaoEntity salaoNovo) throws SQLException {
-        String sql = "insert into salao (salao_nome, salao_cnpj, salao_telefone, salao_email, salao_senha, endereco_endereco_id) values (?, ?, ?, ?, ?, ?);";
-        try (PreparedStatement preparedStatement = ConnectionSingleton.getConnection().prepareStatement(sql, Statement.RETURN_GENERATED_KEYS)){
-            preparedStatement.setString(1, salaoNovo.salao_nome);
-            preparedStatement.setString(2, salaoNovo.salao_cnpj);
-            preparedStatement.setString(3, salaoNovo.salao_telefone);
-            preparedStatement.setString(4, salaoNovo.salao_email);
-            preparedStatement.setString(5, salaoNovo.salao_senha);
-            preparedStatement.setInt(6, salaoNovo.endereco_endereco_id.endereco_id);
-            preparedStatement.execute();
-            try (ResultSet rs = preparedStatement.getGeneratedKeys()) {
-                rs.next();
-                salaoNovo.salao_id = rs.getInt(1);
-            }
-        }
-        return salaoNovo;
-    }
+    //public static SalaoEntity postSalao(SalaoEntity salaoNovo) throws SQLException {
+    //    String sql = "insert into salao (salao_nome, salao_cnpj, salao_telefone, salao_email, salao_senha, endereco_endereco_id) values (?, ?, ?, ?, ?, ?);";
+    //    try (PreparedStatement preparedStatement = ConnectionSingleton.getConnection().prepareStatement(sql, Statement.RETURN_GENERATED_KEYS)){
+    //        preparedStatement.setString(1, salaoNovo.salao_nome);
+    //        preparedStatement.setString(2, salaoNovo.salao_cnpj);
+    //        preparedStatement.setString(3, salaoNovo.salao_telefone);
+    //        preparedStatement.setString(4, salaoNovo.salao_email);
+    //        preparedStatement.setString(5, salaoNovo.salao_senha);
+    //        preparedStatement.setInt(6, salaoNovo.endereco_endereco_id.endereco_id);
+    //        preparedStatement.execute();
+    //        try (ResultSet rs = preparedStatement.getGeneratedKeys()) {
+    //            rs.next();
+    //            salaoNovo.salao_id = rs.getInt(1);
+    //        }
+    //    }
+    //    return salaoNovo;
+    //}
 
     public SalaoEntity updateSalao(SalaoEntity entity, int id) {
         final String sql = "UPDATE salao SET salao_nome = ?, salao_cnpj = ? , salao_telefone = ? , salao_email = ? , salao_senha = ? , endereco_endereco_id = ?  WHERE salao_id = ?";
@@ -80,7 +80,7 @@ public class SalaoDAO {
 
     public static SalaoEntity getSalaoByID(int id) throws SQLException {
         try (PreparedStatement preparedStatement = ConnectionSingleton.getConnection().prepareStatement(
-                "SELECT salao_nome, salao_cnpj, salao_telefone, salao_email, estado_nome, cidade_nome, endereco_bairro, endereco_rua, endereco_numero, endereco_complemento " +
+                "SELECT salao_nome, salao_cnpj, salao_telefone, salao_email, estado_nome, cidade_nome, endereco_bairro, endereco_rua, endereco_numero " +
                         "FROM salao " +
                         "JOIN endereco ON salao.endereco_endereco_id = endereco.endereco_id " +
                         "JOIN cidade ON endereco.cidade_cidade_id = cidade.cidade_id " +
@@ -102,7 +102,6 @@ public class SalaoDAO {
                     endereco.endereco_bairro = rs.getString(7);
                     endereco.endereco_rua = rs.getString(8);
                     endereco.endereco_numero = rs.getString(9);
-                    endereco.endereco_complemento = rs.getString(10);
                     salao.setEndereco_endereco_id(endereco);
                     endereco.setCidadeEntity(cidade);
                     cidade.setEstado_id(estado);

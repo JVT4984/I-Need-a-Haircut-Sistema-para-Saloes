@@ -1,15 +1,21 @@
 package com.tcc.needahaircut;
 
-public class SalaoEntity {
+public class GetSalaoDTO {
 
     public int salao_id;
     public String salao_nome;
     public String salao_cnpj;
     public String salao_telefone;
     public String salao_email;
-    public String salao_senha;
-    public EnderecoEntity endereco_endereco_id;
+    public String bairro;
+    public String rua;
+    public String numero;
+    public String cidade;
+    public String estado;
 
+    public GetSalaoDTO() {
+
+    }
 
     public int getSalao_id() {
         return salao_id;
@@ -51,34 +57,56 @@ public class SalaoEntity {
         this.salao_email = salao_email;
     }
 
-    public String getSalao_senha() {
-        return salao_senha;
+    public String getBairro() {
+        return bairro;
     }
 
-    public void setSalao_senha(String salao_senha) {
-        this.salao_senha = salao_senha;
+    public void setBairro(String bairro) {
+        this.bairro = bairro;
     }
 
-    public EnderecoEntity getEndereco_endereco_id() {
-        return endereco_endereco_id;
+    public String getRua() {
+        return rua;
     }
 
-    public void setEndereco_endereco_id(EnderecoEntity endereco_endereco_id) {
-        this.endereco_endereco_id = endereco_endereco_id;
+    public void setRua(String rua) {
+        this.rua = rua;
     }
 
-    public SalaoEntity(int salao_id, String salao_nome, String salao_cnpj, String salao_telefone, String salao_email, String salao_senha, EnderecoEntity salao_endereco) {
+    public String getNumero() {
+        return numero;
+    }
+
+    public void setNumero(String numero) {
+        this.numero = numero;
+    }
+
+    public String getCidade() {
+        return cidade;
+    }
+
+    public void setCidade(String cidade) {
+        this.cidade = cidade;
+    }
+
+    public String getEstado() {
+        return estado;
+    }
+
+    public void setEstado(String estado) {
+        this.estado = estado;
+    }
+
+    public GetSalaoDTO(int salao_id, String salao_nome, String salao_cnpj, String salao_telefone, String salao_email, String bairro, String rua, String numero, String cidade, String estado) {
         this.salao_id = salao_id;
         this.salao_nome = salao_nome;
         this.salao_cnpj = salao_cnpj;
         this.salao_telefone = salao_telefone;
         this.salao_email = salao_email;
-        this.salao_senha = salao_senha;
-        this.endereco_endereco_id = salao_endereco;
-    }
-
-
-    public SalaoEntity(){
-
+        this.bairro = bairro;
+        this.rua = rua;
+        this.numero = numero;
+        this.cidade = cidade;
+        this.estado = estado;
     }
 }

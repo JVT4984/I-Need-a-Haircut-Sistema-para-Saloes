@@ -32,14 +32,16 @@ public class SalaoController {
     }
 
     @GetMapping("/salao/{id}")
-    public ResponseEntity<SalaoDTO> getSalaoByID(@PathVariable int id) throws SQLException {
+    public ResponseEntity<GetSalaoDTO> getSalaoByID(@PathVariable int id) throws SQLException {
+        final GetSalaoConverter converter = new GetSalaoConverter();
+
         SalaoEntity entity = new SalaoDAO().getSalaoByID(id);
 
         if (entity == null) {
             return ResponseEntity.notFound().build();
         }
 
-        return ResponseEntity.ok().body(new SalaoConverter().toDTO(entity));
+        return ResponseEntity.ok().body(converter.convertToDto(entity));
     }
 
    // @DeleteMapping("/salao/{id}")
