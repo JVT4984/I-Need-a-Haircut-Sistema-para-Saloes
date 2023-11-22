@@ -1,12 +1,14 @@
 package com.tcc.needahaircut;
 
+import org.springframework.stereotype.Component;
+
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.List;
-
+@Component
 public class SalaoDAO {
 
     public static List<SalaoEntity> getSaloes() throws SQLException {
@@ -109,6 +111,31 @@ public class SalaoDAO {
                 }
                 return salao;
             }
+        }
+    }
+
+    public SalaoEntity getBySalao(String email, String senha) throws SQLException {
+        String sql = "select * from salao where salao_email = ? AND salao_senha = ? ";
+        try (PreparedStatement preparedStatement = ConnectionSingleton.getConnection().prepareStatement(sql)) {
+            preparedStatement.setString(1, email);
+            preparedStatement.setString(2, senha);
+
+            try (final ResultSet resultadoSalao = preparedStatement.executeQuery()) {
+                if (!resultadoSalao.next()) {
+                    return null;
+                }
+
+                SalaoEntity salao = new SalaoEntity();
+                salao.salao_id = resultadoSalao.getInt(1);
+                salao.salao_email = resultadoSalao.getString(2);
+                salao.salao_senha = resultadoSalao.getString(3);
+
+                return salao;
+            } catch (Exception e) {
+                throw new RuntimeException(e);
+            }
+        } catch (Exception e) {
+            throw new RuntimeException(e);
         }
     }
 
