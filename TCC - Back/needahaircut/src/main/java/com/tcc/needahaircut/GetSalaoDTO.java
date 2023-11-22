@@ -2,7 +2,6 @@ package com.tcc.needahaircut;
 
 public class GetSalaoDTO {
 
-    public int salao_id;
     public String salao_nome;
     public String salao_cnpj;
     public String salao_telefone;
@@ -15,14 +14,6 @@ public class GetSalaoDTO {
 
     public GetSalaoDTO() {
 
-    }
-
-    public int getSalao_id() {
-        return salao_id;
-    }
-
-    public void setSalao_id(int salao_id) {
-        this.salao_id = salao_id;
     }
 
     public String getSalao_nome() {
@@ -97,8 +88,7 @@ public class GetSalaoDTO {
         this.estado = estado;
     }
 
-    public GetSalaoDTO(int salao_id, String salao_nome, String salao_cnpj, String salao_telefone, String salao_email, String bairro, String rua, String numero, String cidade, String estado) {
-        this.salao_id = salao_id;
+    public GetSalaoDTO(String salao_nome, String salao_cnpj, String salao_telefone, String salao_email, String bairro, String rua, String numero, String cidade, String estado) {
         this.salao_nome = salao_nome;
         this.salao_cnpj = salao_cnpj;
         this.salao_telefone = salao_telefone;

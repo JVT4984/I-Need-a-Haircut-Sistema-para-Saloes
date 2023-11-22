@@ -4,7 +4,6 @@ public class GetSalaoConverter {
 
     public SalaoEntity convertToEntity(GetSalaoDTO getSalaoDTO) {
         SalaoEntity salaoEntity = new SalaoEntity();
-        salaoEntity.setSalao_id(getSalaoDTO.getSalao_id());
         salaoEntity.setSalao_nome(getSalaoDTO.getSalao_nome());
         salaoEntity.setSalao_cnpj(getSalaoDTO.getSalao_cnpj());
         salaoEntity.setSalao_telefone(getSalaoDTO.getSalao_telefone());
@@ -29,22 +28,15 @@ public class GetSalaoConverter {
 
     public GetSalaoDTO convertToDto(SalaoEntity salaoEntity) {
         GetSalaoDTO getSalaoDTO = new GetSalaoDTO();
-        getSalaoDTO.setSalao_id(salaoEntity.getSalao_id());
         getSalaoDTO.setSalao_nome(salaoEntity.getSalao_nome());
         getSalaoDTO.setSalao_cnpj(salaoEntity.getSalao_cnpj());
         getSalaoDTO.setSalao_telefone(salaoEntity.getSalao_telefone());
         getSalaoDTO.setSalao_email(salaoEntity.getSalao_email());
-
-        EnderecoEntity enderecoEntity = new EnderecoEntity();
-        getSalaoDTO.setBairro(enderecoEntity.getEndereco_bairro());
-        getSalaoDTO.setRua(enderecoEntity.getEndereco_rua());
-        getSalaoDTO.setNumero(enderecoEntity.getEndereco_numero());
-
-        CidadeEntity cidadeEntity = new CidadeEntity();
-        getSalaoDTO.setCidade(cidadeEntity.getCidade_nome());
-
-        EstadoEntity estadoEntity = new EstadoEntity();
-        getSalaoDTO.setEstado(estadoEntity.getEstado_nome());
+        getSalaoDTO.setBairro(salaoEntity.getEndereco_endereco_id().endereco_bairro);
+        getSalaoDTO.setRua(salaoEntity.getEndereco_endereco_id().endereco_rua);
+        getSalaoDTO.setNumero(salaoEntity.endereco_endereco_id.endereco_numero);
+        getSalaoDTO.setCidade(salaoEntity.endereco_endereco_id.cidadeEntity.cidade_nome);
+        getSalaoDTO.setEstado(salaoEntity.endereco_endereco_id.cidadeEntity.estado_id.estado_nome);
 
         return getSalaoDTO;
     }
