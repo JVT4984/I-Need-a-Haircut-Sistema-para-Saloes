@@ -5,13 +5,12 @@ function salvar(event) {
     let nome = document.getElementById("validationCustom01").value;
     let sobrenome = document.getElementById("validationCustom02").value;
     let email = document.getElementById("validationCustomUsername").value;
-    let cidade = document.getElementById("validationCustom03").value;
-    let estado = document.getElementById("validationCustom04").value;
+    let cpf = document.getElementById("validationCustom03").value;
     let senha = document.getElementById("validationCustom06").value;
-    let cep = document.getElementById("validationCustom05").value;
+    let telefone = document.getElementById("validationCustom05").value;
 
     // Verificar se todos os campos estão preenchidos
-    if (!nome || !sobrenome || !email || !cidade || !estado || !senha || !cep) {
+    if (!nome || !sobrenome || !email || !cpf || !senha || !telefone) {
         const modalErro = new bootstrap.Modal(document.getElementById('modalErro'), {})
             modalErro.show();
         return;  // Não prosseguir se algum campo estiver vazio
@@ -23,7 +22,7 @@ function salvar(event) {
         let submitButton = document.querySelector('button[type="submit"]');
         //submitButton.disabled = true; COMENTARIO PARA TIRAR
 
-        postPessoa(nome, sobrenome, email, senha, cidade, estado, cep).then(pessoa => {
+        postPessoa(nome, sobrenome, email, senha, cpf, telefone).then(cliente => {
             const modalSucesso = new bootstrap.Modal(document.getElementById('modalSucesso'), {})
             modalSucesso.show();
             spinner.style.display = "none";  // Ocultar o spinner
@@ -36,7 +35,6 @@ function salvar(event) {
             document.getElementById("validationCustom02").value = "";
             document.getElementById("validationCustomUsername").value = "";
             document.getElementById("validationCustom03").value = "";
-            document.getElementById("validationCustom04").value = "";
             document.getElementById("validationCustom06").value = "";
             document.getElementById("validationCustom05").value = "";
         })

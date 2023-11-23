@@ -7,20 +7,24 @@ import java.sql.SQLException;
 import java.util.List;
 
 @RestController
+@RequestMapping("/cliente/")
 public class ClienteController {
 
-    @PostMapping("/cliente/")
+    @PostMapping()
+    @CrossOrigin(origins = "*")
     public ClienteDTO postPessoa(@RequestBody ClienteDTO dto) {
         final ClienteConverter converter = new ClienteConverter();
         return converter.toDTO(new ClienteDAO().postCliente(converter.toEntity(dto)));
     }
 
-    @GetMapping("/cliente/")
+    @GetMapping()
+    @CrossOrigin(origins = "*")
     public List<ClienteEntity> getClientes() throws SQLException {
         return ClienteDAO.getCliente();
     }
 
-    @GetMapping("/cliente/{id}")
+    @GetMapping("{id}")
+    @CrossOrigin(origins = "*")
     public ResponseEntity<ClienteDTO> getCliente(@PathVariable int id) throws SQLException {
         ClienteEntity entity = new ClienteDAO().getClienteID(id);
 
@@ -31,7 +35,8 @@ public class ClienteController {
         return  ResponseEntity.ok().body(new  ClienteConverter().toDTO(entity));
     }
 
-    @DeleteMapping("/cliente/{id}")
+    @DeleteMapping("{id}")
+    @CrossOrigin(origins = "*")
     public ResponseEntity<ClienteDTO> deletePessoa(@PathVariable int id) throws SQLException {
         ClienteEntity entity = new ClienteDAO().delete(id);
 
@@ -41,7 +46,8 @@ public class ClienteController {
         return ResponseEntity.ok().body(new ClienteConverter().toDTO(entity));
     }
 
-    @PutMapping("/cliente/{id}")
+    @PutMapping("{id}")
+    @CrossOrigin(origins = "*")
     public ResponseEntity<ClienteDTO> putCliente(@RequestBody ClienteDTO dto, @PathVariable int id) {
         final ClienteConverter converter = new ClienteConverter();
         ClienteEntity entity = new ClienteDAO().updateCliente(converter.toEntity(dto), id);

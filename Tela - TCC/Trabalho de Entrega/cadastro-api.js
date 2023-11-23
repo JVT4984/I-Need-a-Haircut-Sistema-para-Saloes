@@ -1,53 +1,52 @@
-async function postPessoa(nome, sobrenome, email, senha, cidade, estado, cep) {
-let response = await fetch("https://650eeb4554d18aabfe999fd2.mockapi.io/pessoas", {
+async function postPessoa(nome, sobrenome, email, senha, cpf, telefone) {
+let response = await fetch("http://localhost:8080/cliente/", {
     method: "POST",
     headers: {
         'Accept': 'application/json',
         'Content-Type': 'application/json'
     },
     body: JSON.stringify ({
-        nome: nome,
-        sobrenome: sobrenome,
-        email: email,
-        senha: senha,
-        cidade: cidade,
-        estado: estado,
-        cep: cep
+        cliente_nome: nome,
+        cliente_sobrenome: sobrenome,
+        cliente_email: email,
+        cliente_senha: senha,
+        cliente_cpf: cpf,
+        cliente_telefone: telefone,
     })
 });
-let pessoa = await response.json();
+let cliente = await response.json();
 
 //console.log(pessoas);
 
-return pessoa;
+return cliente;
 }
 
 // Função para carregar produtos
 function carregarServicos() {
-    fetch('https://650eeb4554d18aabfe999fd2.mockapi.io/pessoas')
+    fetch('http://localhost:8080/servico/')
         .then(response => response.json())
         .then(data => {
             let row = document.querySelector('#lista-servico .row');
             // lista com grupos que já foram adicionados, serve para colocar 1 produto por grupo na pagina inicial
             let gruposAdicionados = [];
-            data.forEach(pessoas => {
+            data.forEach(servico => {
                 // verifiqua se o algum produto com o mesmo id_grupo ja está na lista de adicionados, caso não tiver, então coloque um card do novo produto
-                if(!gruposAdicionados.includes(pessoas.id)) {
-                    gruposAdicionados.push(pessoas.id);
+                if(!gruposAdicionados.includes(servico.servico_id)) {
+                    gruposAdicionados.push(servico.servico_id);
                     // criando um novo card e colocando no botão 'comparar' que eu quero passar por parâmetro
                     row.innerHTML += `
                 <div class="col-md-4">
                   <div class="card mb-4 box-shadow">
                     <div class="card-body">
-                      <p class="card-text">${pessoas.nome}</p>
-                      <p class="card-text">${pessoas.sobrenome}</p>
+                      <p class="card-text">${servico.servico_nome}</p>
+                      <p class="card-text">${servico.servico_tipo}</p>
                       <div class="d-flex justify-content-between align-items-center">
                         <div class="btn-group">
                           <button type="button" class="btn btn-sm btn-outline-secondary">Agendar</button>
                           <button type="button" class="btn btn-sm btn-outline-secondary">Editar</button>
                         </div>
-                        <small class="text-muted">${pessoas.cidade}</small>
-                        <small class="text-muted">${pessoas.cep}</small>
+                        <small class="text-muted">${servico.servico_tempo}</small>
+                        <small class="text-muted">${servico.servico_valor}</small>
                       </div>
                     </div>
                   </div>
