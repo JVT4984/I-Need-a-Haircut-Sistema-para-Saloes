@@ -16,6 +16,7 @@ public class LoginController {
     public ClienteDAO clienteDAO;
     @Autowired
     public LoginDAO loginDAO;
+    @Autowired
     public SalaoDAO salaoDAO;
 
     @PostMapping
