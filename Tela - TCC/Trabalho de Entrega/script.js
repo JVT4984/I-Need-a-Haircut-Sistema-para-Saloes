@@ -45,6 +45,10 @@ function Reload(){
     window.location.reload(true);
 }
 
+function irLogin(){
+    document.location.href = 'Login.html'
+}
+
 function salvarAgendamento() {
 
     let nome = document.getElementById("cliente-agenda").value
