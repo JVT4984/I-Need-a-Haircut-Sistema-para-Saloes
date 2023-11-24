@@ -27,8 +27,7 @@ public class SalaoConverter {
 
     public SalaoEntity toEntity(SalaoDTO dto) {
 
-        //int id = dto.endereco_endereco_id;
-        //TODO converter
+
         EnderecoEntity enderecoEntity = new EnderecoEntity();
         enderecoEntity.setEndereco_id(dto.getEndereco_endereco_id());
 
