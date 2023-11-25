@@ -35,22 +35,18 @@ function carregarServicos() {
                     gruposAdicionados.push(servico.servico_id);
                     // criando um novo card e colocando no botão 'comparar' que eu quero passar por parâmetro
                     row.innerHTML += `
-                <div class="col-md-4">
-                  <div class="card mb-4 box-shadow">
-                    <div class="card-body">
-                      <p class="card-text">${servico.servico_nome}</p>
-                      <p class="card-text">${servico.servico_tipo}</p>
-                      <div class="d-flex justify-content-between align-items-center">
-                        <div class="btn-group">
-                          <button type="button" class="btn btn-sm btn-outline-secondary">Agendar</button>
-                          <button type="button" class="btn btn-sm btn-outline-secondary">Editar</button>
+                    <div class="col-md-4">
+                    <div class="card mb-4 box-shadow">
+                      <div class="card-body">
+                        <p class="card-text">Serviço: ${servico.servico_nome}</p>
+                        <p class="card-text">Tipo de Serviço: ${servico.servico_tipo}</p>
+                        <div class="d-flex justify-content-between align-items-center">
+                          <small class="text-muted">Tempo Estimado: ${servico.servico_tempo}</small>
+                          <small class="text-muted">Valor Estimado: R$ ${servico.servico_valor}</small>
                         </div>
-                        <small class="text-muted">${servico.servico_tempo}</small>
-                        <small class="text-muted">${servico.servico_valor}</small>
                       </div>
                     </div>
-                  </div>
-                </div>`;
+                  </div>`;
                 }
             });
         }) 
