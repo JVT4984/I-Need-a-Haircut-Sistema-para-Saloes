@@ -44,6 +44,14 @@ public class SalaoController {
         return ResponseEntity.ok().body(converter.convertToDto(entity));
     }
 
+    @GetMapping("/salaoTeste/")
+    public List<GetSalaoDTO> getSalaoTeste() throws SQLException {
+        final GetSalaoConverter converter = new GetSalaoConverter();
+
+        List<SalaoEntity> entities = new SalaoDAO().getSalaoByTeste();
+        return converter.convertToDtoTeste(entities);
+    }
+
    // @DeleteMapping("/salao/{id}")
   //  public SalaoDTO deletarSalao(@PathVariable("id") int id) throws SQLException {
    //     SalaoDAO salaoDAO = new SalaoDAO();

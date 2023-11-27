@@ -139,6 +139,41 @@ public class SalaoDAO {
         }
     }
 
+    public static List<SalaoEntity> getSalaoByTeste() throws SQLException {
+        List<SalaoEntity> saloes = new ArrayList<>();
+        try (PreparedStatement preparedStatement = ConnectionSingleton.getConnection().prepareStatement(
+                "SELECT salao_nome, salao_cnpj, salao_telefone, salao_email, estado_nome, cidade_nome, endereco_bairro, endereco_rua, endereco_numero " +
+                        "FROM salao " +
+                        "JOIN endereco ON salao.endereco_endereco_id = endereco.endereco_id " +
+                        "JOIN cidade ON endereco.cidade_cidade_id = cidade.cidade_id " +
+                        "JOIN estado ON cidade.estado_estado_id = estado.estado_id ")) {
+            try (ResultSet rs = preparedStatement.executeQuery()) {
+                while (rs.next()) {
+                    SalaoEntity salao = new SalaoEntity();
+                    EnderecoEntity endereco = new EnderecoEntity();
+                    CidadeEntity cidade = new CidadeEntity();
+                    EstadoEntity estado = new EstadoEntity();
+                    salao.salao_nome = rs.getString(1);
+                    salao.salao_cnpj = rs.getString(2);
+                    salao.salao_telefone = rs.getString(3);
+                    salao.salao_email = rs.getString(4);
+                    estado.estado_nome = rs.getString(5);
+                    cidade.cidade_nome = rs.getString(6);
+                    endereco.endereco_bairro = rs.getString(7);
+                    endereco.endereco_rua = rs.getString(8);
+                    endereco.endereco_numero = rs.getString(9);
+                    salao.setEndereco_endereco_id(endereco);
+                    endereco.setCidadeEntity(cidade);
+                    cidade.setEstado_id(estado);
+                    estado.setEstado_codigo(estado.getEstado_nome());
+                    saloes.add(salao);
+                }
+            }
+        }
+        return saloes;
+    }
+
+
     //public static SalaoDTO deleteSalao(int id) throws SQLException {
      //   SalaoDTO salao = getSalaoByID(id);
     //    try (PreparedStatement preparedStatement = ConnectionSingleton.getConnection().prepareStatement( "delete from salao where salao_id = ?")) {

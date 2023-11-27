@@ -15,6 +15,9 @@ public class ServicoEntity {
 
     }
 
+    public ServicoEntity(int servicoId) {
+    }
+
 
     public int getServico_id() {
         return servico_id;

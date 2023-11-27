@@ -1,5 +1,8 @@
 package com.tcc.needahaircut;
 
+import java.util.ArrayList;
+import java.util.List;
+
 public class GetSalaoConverter {
 
     public SalaoEntity convertToEntity(GetSalaoDTO getSalaoDTO) {
@@ -39,6 +42,24 @@ public class GetSalaoConverter {
         getSalaoDTO.setEstado(salaoEntity.endereco_endereco_id.cidadeEntity.estado_id.estado_nome);
 
         return getSalaoDTO;
+    }
+
+    List<GetSalaoDTO> convertToDtoTeste(List<SalaoEntity> entities) {
+        List<GetSalaoDTO> dtos = new ArrayList<>();
+        for (SalaoEntity entity : entities) {
+            GetSalaoDTO dto = new GetSalaoDTO();
+            dto.setSalao_nome(entity.getSalao_nome());
+            dto.setSalao_cnpj(entity.getSalao_cnpj());
+            dto.setSalao_telefone(entity.salao_telefone);
+            dto.setSalao_email(entity.salao_email);
+            dto.setEstado(entity.getEndereco_endereco_id().cidadeEntity.estado_id.estado_nome);
+            dto.setCidade(entity.getEndereco_endereco_id().cidadeEntity.cidade_nome);
+            dto.setBairro(entity.getEndereco_endereco_id().endereco_bairro);
+            dto.setRua(entity.getEndereco_endereco_id().endereco_rua);
+            dto.setNumero(entity.endereco_endereco_id.endereco_numero);
+            dtos.add(dto);
+        }
+        return dtos;
     }
 
 }

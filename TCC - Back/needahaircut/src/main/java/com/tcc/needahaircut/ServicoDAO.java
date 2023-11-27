@@ -1,8 +1,6 @@
 package com.tcc.needahaircut;
 
-import java.sql.ResultSet;
-import java.sql.SQLException;
-import java.sql.Statement;
+import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -23,6 +21,23 @@ public class ServicoDAO {
                     servicos.add(servico);
                 }
                 return servicos;
+            }
+        }
+    }
+
+    public static ServicoEntity getServicobyNome(String nomeServico) throws SQLException {
+        final String sql = "select servico_id from servico where servico_nome = ?";
+        try (PreparedStatement preparedStatement = ConnectionSingleton.getConnection().prepareStatement(sql)) {
+            preparedStatement.setString(1, nomeServico);
+
+            try (final ResultSet resultadoServico = preparedStatement.executeQuery()) {
+                if (!resultadoServico.next()) {
+                    return null;
+                }
+
+                int servico_id = resultadoServico.getInt("servico_id");
+
+                return new ServicoEntity(servico_id);
             }
         }
     }
