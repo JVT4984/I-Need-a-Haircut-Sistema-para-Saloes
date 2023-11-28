@@ -23,7 +23,7 @@ public class AgendaDAO {
     }
 
     public static AgendaEntity getAgendabyNome(Date dataAgenda, Time hrInicio) throws SQLException {
-        final String sql = "select agenda_id from agenda where agenda_data = ? and hrInicio = ?";
+        final String sql = "select agenda_id from agenda where data = ? and hrInicio = ?";
         try (PreparedStatement preparedStatement = ConnectionSingleton.getConnection().prepareStatement(sql)) {
             preparedStatement.setDate(1, dataAgenda);
             preparedStatement.setTime(2, hrInicio);

@@ -12,18 +12,18 @@ public class AgendaPedidoController {
 
     @PostMapping()
     @CrossOrigin(origins = "*")
-    public AgendaPedidoDTO postPedido(@RequestBody AgendaPedidoDTO dto) throws SQLException {
+    public AgendaPedidoDTO postPedido(@RequestBody AgendaDTO agendaDTO, ServicoDTO servicoDTO, AgendaPedidoDTO dto) throws SQLException {
         final AgendaPedidoConverter converter = new AgendaPedidoConverter();
         final AgendaDAO agendaDAO = new AgendaDAO();
         final ServicoDAO servicoDAO = new ServicoDAO();
         final AgendaPedidoDAO agendaPedidoDAO = new AgendaPedidoDAO();
 
-        Date data = new Date(dto.getAgenda_id());
-        Time hora = new Time(dto.getAgenda_id());
+        Date data = new Date(agendaDTO.getAgenda_id());
+        Time hora = new Time(agendaDTO.getAgenda_id());
 
         AgendaEntity agendaID = agendaDAO.getAgendabyNome(data, hora);
 
-        String nomeServico = new String(String.valueOf(dto.getServico_id()));
+        String nomeServico = new String(String.valueOf(servicoDTO.getServico_id()));
 
         ServicoEntity servicoID = servicoDAO.getServicobyNome(nomeServico);
 

@@ -10,10 +10,10 @@ public class AgendaPedidoConverter {
         clienteEntity.setCliente_id(agendaPedidoDTO.getCliente_id());
 
         ServicoEntity servicoEntity = new ServicoEntity();
-        servicoEntity.setServico_id(agendaPedidoDTO.servico_id);
+        servicoEntity.setServico_id(agendaPedidoDTO.getServico_id());
 
         AgendaEntity agendaEntity = new AgendaEntity();
-        agendaEntity.setAgenda_id(agendaPedidoDTO.agenda_id);
+        agendaEntity.setAgenda_id(agendaPedidoDTO.getAgenda_id());
 
         return agendaPedidoEntity;
     }

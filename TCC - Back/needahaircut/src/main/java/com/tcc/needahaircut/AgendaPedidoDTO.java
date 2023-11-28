@@ -3,6 +3,7 @@ package com.tcc.needahaircut;
 public class AgendaPedidoDTO {
 
     public int agendamneto_id;
+
     public int cliente_id;
     public int servico_id;
     public int avaliacao_id;

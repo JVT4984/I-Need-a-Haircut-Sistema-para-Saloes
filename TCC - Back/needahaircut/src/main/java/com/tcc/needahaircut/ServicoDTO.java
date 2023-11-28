@@ -4,6 +4,7 @@ import java.sql.Time;
 
 public class ServicoDTO {
 
+    public int servico_id;
     public String servico_nome;
     public String servico_tipo;
     public Time servico_tempo;
@@ -11,6 +12,14 @@ public class ServicoDTO {
 
     public ServicoDTO() {
 
+    }
+
+    public int getServico_id() {
+        return servico_id;
+    }
+
+    public void setServico_id(int servico_id) {
+        this.servico_id = servico_id;
     }
 
     public String getServico_nome() {
