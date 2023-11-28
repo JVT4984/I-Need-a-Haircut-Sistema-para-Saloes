@@ -15,6 +15,6 @@ public class AgendaController {
         final AgendaConverter converter = new AgendaConverter();
 
         List<AgendaEntity> entities = new AgendaDAO().getAgenda();
-        return converter.convertToDTO(entities);
+        return converter.convertToDTOList(entities);
     }
 }

@@ -61,4 +61,9 @@ public class ServicoDTO {
         this.servico_tempo = servico_tempo;
         this.servico_valor = servico_valor;
     }
+
+    public String servico_nome() {
+
+        return null;
+    }
 }

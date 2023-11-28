@@ -11,4 +11,10 @@ public class ServicoConverter {
 
         return servicoDTO;
     }
+    public ServicoDTO convertNomebyDTO(ServicoEntity servicoEntity) {
+        ServicoDTO servicoDTO = new ServicoDTO();
+        servicoDTO.setServico_nome(servicoEntity.getServico_nome());
+
+        return servicoDTO;
+    }
 }

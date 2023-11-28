@@ -1,5 +1,7 @@
 package com.tcc.needahaircut;
 
+import org.springframework.http.RequestEntity;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.sql.Date;
@@ -21,7 +23,7 @@ public class AgendaPedidoController {
         Date data = new Date(agendaDTO.getAgenda_id());
         Time hora = new Time(agendaDTO.getAgenda_id());
 
-        AgendaEntity agendaID = agendaDAO.getAgendabyNome(data, hora);
+        AgendaEntity agendaID = agendaPedidoDAO.getAgendabyData(data, hora);
 
         String nomeServico = new String(String.valueOf(servicoDTO.getServico_id()));
 
@@ -36,6 +38,28 @@ public class AgendaPedidoController {
         return converter.converterToDTO(savedEntity);
     }
 
+    @GetMapping("agenda")
+    @CrossOrigin(origins = "*")
+    public ResponseEntity<AgendaDTO> getAgenda(@RequestBody AgendaDTO data, AgendaDTO horario) throws SQLException {
+        AgendaEntity entity = new AgendaPedidoDAO().getAgendabyData(data.getData(), horario.getHorario());
 
+        //if (entity == null) {
+        //    return ResponseEntity.notFound().build();
+        //}
 
+        return ResponseEntity.ok().body(new AgendaConverter().convertToDTO(entity));
+    }
+
+    @GetMapping("servico")
+    @CrossOrigin(origins = "*")
+    public ResponseEntity<ServicoDTO> getServico(@RequestBody ServicoDTO servico_nome) throws SQLException {
+        ServicoEntity entity = new AgendaPedidoDAO().getServicobyNome(servico_nome.servico_nome());
+
+        //if (entity == null) {
+        //    return ResponseEntity.notFound().build();
+        //}
+
+        return ResponseEntity.ok().body(new ServicoConverter().convertNomebyDTO(entity));
+    }
 }
+
