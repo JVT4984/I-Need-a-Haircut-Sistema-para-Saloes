@@ -2,13 +2,15 @@ package com.tcc.needahaircut;
 
 import java.sql.Date;
 import java.sql.Time;
+import java.time.LocalDate;
+import java.time.LocalTime;
 
 public class AgendaEntity {
 
     public int agenda_id;
-    public Date data;
-    public Time hrInicio;
-    public Time hrFinal;
+    public LocalDate data;
+    public LocalTime hrInicio;
+    public LocalTime hrFinal;
     public int atendentes;
     public SalaoEntity salao_id;
 
@@ -17,6 +19,7 @@ public class AgendaEntity {
     }
 
     public AgendaEntity(int id) {
+        this.agenda_id = id;
     }
 
 
@@ -28,27 +31,27 @@ public class AgendaEntity {
         this.agenda_id = agenda_id;
     }
 
-    public Date getData() {
+    public LocalDate getData() {
         return data;
     }
 
-    public void setData(Date data) {
+    public void setData(LocalDate data) {
         this.data = data;
     }
 
-    public Time getHrInicio() {
+    public LocalTime getHrInicio() {
         return hrInicio;
     }
 
-    public void setHrInicio(Time hrInicio) {
+    public void setHrInicio(LocalTime hrInicio) {
         this.hrInicio = hrInicio;
     }
 
-    public Time getHrFinal() {
+    public LocalTime getHrFinal() {
         return hrFinal;
     }
 
-    public void setHrFinal(Time hrFinal) {
+    public void setHrFinal(LocalTime hrFinal) {
         this.hrFinal = hrFinal;
     }
 
@@ -68,12 +71,4 @@ public class AgendaEntity {
         this.salao_id = salao_id;
     }
 
-    public AgendaEntity(int agenda_id, Date data, Time hrInicio, Time hrFinal, int atendentes, SalaoEntity salao_id) {
-        this.agenda_id = agenda_id;
-        this.data = data;
-        this.hrInicio = hrInicio;
-        this.hrFinal = hrFinal;
-        this.atendentes = atendentes;
-        this.salao_id = salao_id;
-    }
 }

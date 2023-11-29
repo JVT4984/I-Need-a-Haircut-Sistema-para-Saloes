@@ -2,12 +2,19 @@ package com.tcc.needahaircut;
 
 import java.sql.Date;
 import java.sql.Time;
+import java.time.LocalDate;
+import java.time.LocalTime;
 
 public class AgendaDTO {
 
     public int agenda_id;
-    public Date data;
-    public Time horario;
+    public LocalDate data;
+    public LocalTime horario;
+
+    public AgendaDTO() {
+
+    }
+
 
     public int getAgenda_id() {
         return agenda_id;
@@ -17,30 +24,19 @@ public class AgendaDTO {
         this.agenda_id = agenda_id;
     }
 
-    public Date getData() {
+    public LocalDate getData() {
         return data;
     }
 
-    public void setData(Date data) {
+    public void setData(LocalDate data) {
         this.data = data;
     }
 
-    public Time getHorario() {
+    public LocalTime getHorario() {
         return horario;
     }
 
-    public void setHorario(Time horario) {
+    public void setHorario(LocalTime horario) {
         this.horario = horario;
     }
-
-    public AgendaDTO(int agenda_id, Date data, Time horario) {
-        this.agenda_id = agenda_id;
-        this.data = data;
-        this.horario = horario;
-    }
-
-    public AgendaDTO() {
-
-    }
-
 }

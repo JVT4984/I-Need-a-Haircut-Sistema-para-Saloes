@@ -1,11 +1,16 @@
 package com.tcc.needahaircut;
 
+import org.springframework.stereotype.Component;
+
 import java.sql.*;
 import java.text.SimpleDateFormat;
+import java.time.LocalDate;
+import java.time.LocalTime;
 
+@Component
 public class AgendaPedidoDAO {
 
-    public static AgendaPedidoEntity postAgendameto(AgendaPedidoEntity entity) throws SQLException {
+    public AgendaPedidoEntity postAgendameto(AgendaPedidoEntity entity) throws SQLException {
         final String sql = "insert into agdpedidodoservico (cliente_cliente_id, servico_servico_id, agenda_agenda_id) values (?, ?, ?)";
         try (final PreparedStatement preparedStatement = ConnectionSingleton.getConnection().prepareStatement(sql, Statement.RETURN_GENERATED_KEYS)){
             preparedStatement.setInt(1, entity.cliente_id.cliente_id);
@@ -21,22 +26,18 @@ public class AgendaPedidoDAO {
         }
     }
 
-    public static AgendaEntity getAgendabyData(Date dataAgenda, Time hrInicio) throws SQLException {
-        SimpleDateFormat formatoDestino = new SimpleDateFormat("yyyy-MM-dd");
-        String formatoAnoMesDia = formatoDestino.format(dataAgenda);
-        final String sql = "select agenda_id from agenda where agenda_data = ? and hrInicio = ?";
+    public int getAgendabyData(LocalDate dataAgenda, LocalTime hrInicio) throws SQLException {
+        final String sql = "select agenda_id from agenda where data = ? and hrInicio = ?";
         try (PreparedStatement preparedStatement = ConnectionSingleton.getConnection().prepareStatement(sql)) {
-            preparedStatement.setString(1, formatoAnoMesDia);
-            preparedStatement.setTime(2, hrInicio);
+            preparedStatement.setDate(1, Date.valueOf(dataAgenda));
+            preparedStatement.setTime(2, Time.valueOf(hrInicio));
 
             try (final ResultSet resultadoAgenda = preparedStatement.executeQuery()) {
                 if (!resultadoAgenda.next()) {
-                    return null;
+                    return -1;
                 }
 
-                int id = resultadoAgenda.getInt("agenda_id");
-
-                return new AgendaEntity(id);
+                return resultadoAgenda.getInt("agenda_id");
             }
         }
     }

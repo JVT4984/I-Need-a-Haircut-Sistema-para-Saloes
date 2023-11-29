@@ -1,5 +1,8 @@
 package com.tcc.needahaircut;
 
+import org.springframework.stereotype.Component;
+
+@Component
 public class AgendaPedidoConverter {
 
     public AgendaPedidoEntity convertToEntity(AgendaPedidoDTO agendaPedidoDTO) {
@@ -26,5 +29,11 @@ public class AgendaPedidoConverter {
         agendaPedidoDTO.setServico_id(agendaPedidoEntity.getServico_id().servico_id);
 
         return agendaPedidoDTO;
+    }
+    public AgendaPedidoEntity coverterToEntityAgenda(AgendaDTO agendaDTO) {
+        AgendaPedidoEntity agendaPedidoEntity = new AgendaPedidoEntity();
+        agendaPedidoEntity.setAgendamento_id(agendaDTO.getAgenda_id());
+
+        return agendaPedidoEntity;
     }
 }
