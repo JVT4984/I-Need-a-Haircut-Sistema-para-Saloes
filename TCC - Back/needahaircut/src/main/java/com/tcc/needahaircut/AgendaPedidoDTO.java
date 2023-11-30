@@ -2,7 +2,7 @@ package com.tcc.needahaircut;
 
 public class AgendaPedidoDTO {
 
-    public int agendamneto_id;
+    public int agendamento_id;
 
     public int cliente_id;
     public int servico_id;
@@ -14,12 +14,12 @@ public class AgendaPedidoDTO {
     }
 
 
-    public int getAgendamneto_id() {
-        return agendamneto_id;
+    public int getAgendameto_id() {
+        return agendamento_id;
     }
 
-    public void setAgendamneto_id(int agendamneto_id) {
-        this.agendamneto_id = agendamneto_id;
+    public void setAgendamento_id(int agendamento_id) {
+        this.agendamento_id = agendamento_id;
     }
 
     public int getCliente_id() {
@@ -54,8 +54,8 @@ public class AgendaPedidoDTO {
         this.agenda_id = agenda_id;
     }
 
-    public AgendaPedidoDTO(int agendamneto_id, int cliente_id, int servico_id, int avaliacao_id, int agenda_id) {
-        this.agendamneto_id = agendamneto_id;
+    public AgendaPedidoDTO(int agendamento_id, int cliente_id, int servico_id, int avaliacao_id, int agenda_id) {
+        this.agendamento_id = agendamento_id;
         this.cliente_id = cliente_id;
         this.servico_id = servico_id;
         this.avaliacao_id = avaliacao_id;

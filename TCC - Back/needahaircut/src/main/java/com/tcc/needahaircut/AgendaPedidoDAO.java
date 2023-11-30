@@ -42,7 +42,7 @@ public class AgendaPedidoDAO {
         }
     }
 
-    public static ServicoEntity getServicobyNome(String nomeServico) throws SQLException {
+    public ServicoEntity getServicobyNome(String nomeServico) throws SQLException {
         final String sql = "select servico_id from servico where servico_nome = ?";
         try (PreparedStatement preparedStatement = ConnectionSingleton.getConnection().prepareStatement(sql)) {
             preparedStatement.setString(1, nomeServico);
@@ -55,6 +55,71 @@ public class AgendaPedidoDAO {
                 int servico_id = resultadoServico.getInt("servico_id");
 
                 return new ServicoEntity(servico_id);
+            }
+        }
+    }
+
+    public AgendaPedidoEntity updateAgendamento(AgendaPedidoEntity entity, int id) throws SQLException {
+        final String sql = "UPDATE agdpedidodoservico SET cliente_cliente_id = ?, servico_servico_id = ?, agenda_agenda_id = ? WHERE agendamento_id = ?";
+        try (final PreparedStatement preparedStatement = ConnectionSingleton.getConnection().prepareStatement(sql)) {
+            preparedStatement.setInt(1, entity.cliente_id.getCliente_id());
+            preparedStatement.setInt(2, entity.servico_id.getServico_id());
+            preparedStatement.setInt(3, entity.agenda_id.getAgenda_id());
+            preparedStatement.setInt(4, id);
+            int pedidoAlterado = preparedStatement.executeUpdate();
+
+            if (pedidoAlterado == 0) {
+                return null;
+            }
+            entity.agendamento_id = id;
+            return entity;
+        }
+    }
+
+    public AgendaPedidoEntity deleteAgendamento(int id) throws SQLException {
+        final AgendaPedidoEntity agendamentoDeletado = getAgendaID(id);
+
+        final String sql = "delete from agdpedidodoservico WHERE agendamento_id = ?";
+        try (final PreparedStatement preparedStatement = ConnectionSingleton.getConnection().prepareStatement(sql)){
+            preparedStatement.setInt(1, id);
+            int linhaAlterada = preparedStatement.executeUpdate();
+
+            if (linhaAlterada == 0) {
+                return null;
+            }
+
+            return agendamentoDeletado;
+        }
+    }
+
+    public AgendaPedidoEntity getAgendaID(int idFilter) throws SQLException {
+        final String sql = "select * from agdpedidodoservico where agendamento_id = ?";
+        try (final  PreparedStatement preparedStatement = ConnectionSingleton.getConnection().prepareStatement(sql)) {
+            preparedStatement.setInt(1, idFilter);
+
+            try (final ResultSet resultadoAgenda = preparedStatement.executeQuery()) {
+                if (!resultadoAgenda.next()) {
+                    return null;
+                }
+
+                int id = resultadoAgenda.getInt("agendamento_id");
+                int clienteId = resultadoAgenda.getInt("cliente_cliente_id");
+                ClienteEntity clienteEntity = new ClienteEntity();
+                clienteEntity.setCliente_id(clienteId);
+                int servicoId = resultadoAgenda.getInt("servico_servico_id");
+                ServicoEntity servicoEntity = new ServicoEntity();
+                servicoEntity.setServico_id(servicoId);
+                int agendaId = resultadoAgenda.getInt("agenda_agenda_id");
+                AgendaEntity agendaEntity = new AgendaEntity();
+                agendaEntity.setAgenda_id(agendaId);
+
+                AgendaPedidoEntity agendaPedidoEntity = new AgendaPedidoEntity();
+                agendaPedidoEntity.setAgendamento_id(id);
+                agendaPedidoEntity.setCliente_id(clienteEntity);
+                agendaPedidoEntity.setServico_id(servicoEntity);
+                agendaPedidoEntity.setAgenda_id(agendaEntity);
+
+                return agendaPedidoEntity;
             }
         }
     }

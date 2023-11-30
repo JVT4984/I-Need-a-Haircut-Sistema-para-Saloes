@@ -20,26 +20,10 @@ public class AgendaPedidoController {
 
     @PostMapping()
     @CrossOrigin(origins = "*")
-    public ResponseEntity<AgendaPedidoDTO> postPedido(@RequestBody AgendaDTO agendaDTO, AgendaPedidoDTO dto) throws SQLException {
-        int idAgendaPedido = agendaPedidoDao.getAgendabyData(agendaDTO.getData(), agendaDTO.getHorario());
-
-        if (idAgendaPedido < 0) {
-            return ResponseEntity.notFound().build();
-        }
-
+    public ResponseEntity<AgendaPedidoDTO> postPedido(@RequestBody AgendaPedidoDTO dto) throws SQLException {
         AgendaPedidoConverter converter = agendaPedidoConverter;
-        int converterAgenda = converter.coverterToEntityAgenda(agendaPedidoDao.postAgendameto(converter.coverterToEntityAgenda(idAgendaPedido)));
         AgendaPedidoDTO agendaPedidoDTO = converter.converterToDTO(agendaPedidoDao.postAgendameto(converter.convertToEntity(dto)));
-
-       // AgendaPedidoEntity entity = converter.convertToEntity(dto);
-       // entity.setServico_id(servicoID);
-       // entity.setAgenda_id(agendaID);
-
-      // AgendaPedidoEntity savedEntity = agendaPedidoDAO.postAgendameto(entity);
-
-        return converter.converterToDTO(savedEntity);
-
-        return null;
+        return ResponseEntity.ok(agendaPedidoDTO);
     }
 
     @GetMapping("agenda")
@@ -64,6 +48,41 @@ public class AgendaPedidoController {
         //}
 
         return ResponseEntity.ok().body(new ServicoConverter().convertNomebyDTO(entity));
+    }
+
+    @PutMapping("{id}")
+    @CrossOrigin(origins = "*")
+    public ResponseEntity<AgendaPedidoDTO> putPedido(@RequestBody AgendaPedidoDTO dto, @PathVariable int id) throws SQLException {
+        AgendaPedidoConverter converter = agendaPedidoConverter;
+        AgendaPedidoDTO agendaPedidoDTO = converter.converterToDTO(agendaPedidoDao.updateAgendamento(converter.convertToEntity(dto), id));
+        return ResponseEntity.ok(agendaPedidoDTO);
+    }
+
+    @DeleteMapping("{id}")
+    @CrossOrigin(origins = "*")
+    public ResponseEntity<AgendaPedidoDTO> deletPedido(@PathVariable int id) throws SQLException {
+        AgendaPedidoEntity agendaPedidoEntity = agendaPedidoDao.getAgendaID(id);
+
+        if (agendaPedidoEntity == null) {
+            return ResponseEntity.notFound().build();
+        }
+
+        agendaPedidoDao.deleteAgendamento(id);
+        AgendaPedidoDTO agendaPedidoDTO = agendaPedidoConverter.converterToDTO(agendaPedidoEntity);
+
+        return ResponseEntity.ok().body(agendaPedidoDTO);
+    }
+
+    @GetMapping("{id}")
+    @CrossOrigin(origins = "*")
+    public ResponseEntity<AgendaPedidoDTO> getAgendaByID(@PathVariable int id) throws SQLException {
+        AgendaPedidoEntity agendaPedidoEntity = agendaPedidoDao.getAgendaID(id);
+
+        if (agendaPedidoEntity == null) {
+            return ResponseEntity.notFound().build();
+        }
+
+        return ResponseEntity.ok().body(agendaPedidoConverter.converterToDTO(agendaPedidoEntity));
     }
 }
 
