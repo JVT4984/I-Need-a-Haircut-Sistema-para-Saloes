@@ -45,6 +45,7 @@ public class SalaoController {
     }
 
     @GetMapping("/salaoTeste/")
+    @CrossOrigin(origins = "*")
     public List<GetSalaoDTO> getSalaoTeste() throws SQLException {
         final GetSalaoConverter converter = new GetSalaoConverter();
 

@@ -139,3 +139,7 @@ function carregarTudo() {
 // Chamar a função quando a página carregar
 window.onload = carregarTudo;
 
+function irInfoSalao() {
+    document.location.href = 'InfoSalao.html'
+  }
+
