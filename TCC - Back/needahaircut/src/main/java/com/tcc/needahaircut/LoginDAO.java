@@ -3,6 +3,7 @@ package com.tcc.needahaircut;
 import org.springframework.stereotype.Component;
 
 import java.sql.PreparedStatement;
+import java.sql.ResultSet;
 import java.sql.SQLException;
 @Component
 public class LoginDAO {
@@ -24,6 +25,21 @@ public class LoginDAO {
             preparedStatement.setString(2, novoLogin.token);
 
             preparedStatement.execute();
+        }
+    }
+
+    public Integer NivelAcesso(String token) throws SQLException {
+        String sql = "select cliente_cliente_id from login WHERE token = ?";
+        try (PreparedStatement preparedStatement = ConnectionSingleton.getConnection().prepareStatement(sql)) {
+            preparedStatement.setString(1, token);
+
+            try (ResultSet resultado = preparedStatement.executeQuery()) {
+                if (resultado.next()) {
+                    return resultado.getInt(1);
+                } else {
+                    return -1;
+                }
+            }
         }
     }
 }

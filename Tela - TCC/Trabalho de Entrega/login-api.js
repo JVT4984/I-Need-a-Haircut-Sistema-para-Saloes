@@ -14,3 +14,22 @@ async function loginAPI(email, senha) {
 
     return token;
 }
+
+async function nivelAcesso() {
+    console.log('Authorization', localStorage.getItem("token"))
+    let response = await fetch("http://localhost:8080/login/", {
+        headers: {
+            'Accept': 'application/json',
+            'Content-Type': 'application/json',
+            'Authorization': localStorage.getItem("token")
+            }
+    });
+    
+    let acesso = await response.json();
+    console.log(acesso)
+
+    //console.log(pessoas);
+
+    return acesso;
+
+}

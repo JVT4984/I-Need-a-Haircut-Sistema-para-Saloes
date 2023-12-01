@@ -1,6 +1,6 @@
 function login() {
-let email = document.getElementById("email").value;
-let senha = document.getElementById("senha").value;
+    let email = document.getElementById("email").value;
+    let senha = document.getElementById("senha").value;
     loginAPI(email, senha).then(token => {
         if (token === "") { //Usuario ou senha Invalida
             const modalErroLogin = new bootstrap.Modal(document.getElementById('modalErroLogin'), {})
@@ -12,9 +12,14 @@ let senha = document.getElementById("senha").value;
             //Limpa os Campos
             document.getElementById("email").value = "";
             document.getElementById("senha").value = "";
-            //Redirecionar para a tela de pessoas
-            document.location.href = 'Tela Inicial.html'
         }
+        nivelAcesso().then(idCliente => {
+            if (idCliente.idCliente !== null) {
+                document.location.href = 'Tela Inicial.html'
+            } else {
+               document.location.href = 'TelaSalão.html'
+            }
+            })
     })
 }
 

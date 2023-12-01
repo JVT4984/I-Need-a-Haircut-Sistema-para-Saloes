@@ -2,6 +2,7 @@ package com.tcc.needahaircut;
 
 import com.fasterxml.jackson.annotation.ObjectIdGenerators;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -61,6 +62,20 @@ public class LoginController {
                 System.out.println("Nenhum Existe");
                 return ResponseEntity.status(HttpStatus.UNAUTHORIZED).build();
             }
+        }
+    }
+
+    @GetMapping
+    @CrossOrigin(origins = "*")
+    public ResponseEntity<NiveldeAcessoDTO> NivelEntrada(@RequestHeader(HttpHeaders.AUTHORIZATION) String header) throws SQLException {
+        Integer id = loginDAO.NivelAcesso(header);
+        if (id > 0) {
+            NiveldeAcessoDTO dto = new NiveldeAcessoDTO();
+            dto.setIdCliente(id);
+            return ResponseEntity.ok(dto);
+        } else {
+            NiveldeAcessoDTO dto = new NiveldeAcessoDTO();
+            return new ResponseEntity<>(dto, HttpStatus.NOT_FOUND);
         }
     }
 }
