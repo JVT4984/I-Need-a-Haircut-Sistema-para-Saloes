@@ -143,3 +143,11 @@ function irInfoSalao() {
     document.location.href = 'InfoSalao.html'
   }
 
+
+function irParaInfCliente() {
+    document.location.href = "infoCliente.html"
+}
+
+function irInfSalaobySalao() {
+    document.location.href = "InfoSalaoParaSalao.html"
+}

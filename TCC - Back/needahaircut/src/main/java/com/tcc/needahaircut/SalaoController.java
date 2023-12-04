@@ -1,5 +1,8 @@
 package com.tcc.needahaircut;
 
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpHeaders;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
@@ -8,6 +11,9 @@ import java.util.List;
 
 @RestController
 public class SalaoController {
+
+    @Autowired
+    public LoginDAO loginDAO;
 
     @GetMapping("/salao/")
     public List<SalaoEntity> getSalao() throws SQLException {
@@ -20,22 +26,34 @@ public class SalaoController {
    //     return salaoDTO;
  //   }
 
-    @PutMapping("/salao/{id}")
-    public ResponseEntity<SalaoDTO> putCliente(@RequestBody SalaoDTO dto, @PathVariable int id) {
+    @PutMapping("/salao/put")
+    @CrossOrigin(origins = "*")
+    public ResponseEntity<SalaoDTO> putCliente(@RequestBody SalaoDTO dto, @RequestHeader(HttpHeaders.AUTHORIZATION) String header) throws SQLException {
+
+        int salaoID = loginDAO.tokenExisteSalao(header);
+            if (salaoID < 0) {
+                return ResponseEntity.status(HttpStatus.UNAUTHORIZED).build();
+            }
         final SalaoConverter converter = new SalaoConverter();
 
-        SalaoEntity entity = new SalaoDAO().updateSalao(converter.toEntity(dto), id);
+        SalaoEntity entity = new SalaoDAO().updateSalao(converter.toEntity(dto), salaoID);
         if (entity == null) {
             return ResponseEntity.notFound().build();
         }
         return ResponseEntity.ok().body(converter.toDTO(entity));
     }
 
-    @GetMapping("/salao/{id}")
-    public ResponseEntity<GetSalaoDTO> getSalaoByID(@PathVariable int id) throws SQLException {
+    @GetMapping("/salao/id")
+    @CrossOrigin(origins = "*")
+    public ResponseEntity<GetSalaoDTO> getSalaoByID(@RequestHeader(HttpHeaders.AUTHORIZATION) String header) throws SQLException {
+
+        int salaoID = loginDAO.tokenExisteSalao(header);
+            if (salaoID < 0) {
+                return ResponseEntity.status(HttpStatus.UNAUTHORIZED).build();
+            }
         final GetSalaoConverter converter = new GetSalaoConverter();
 
-        SalaoEntity entity = new SalaoDAO().getSalaoByID(id);
+        SalaoEntity entity = new SalaoDAO().getSalaoByID(salaoID);
 
         if (entity == null) {
             return ResponseEntity.notFound().build();

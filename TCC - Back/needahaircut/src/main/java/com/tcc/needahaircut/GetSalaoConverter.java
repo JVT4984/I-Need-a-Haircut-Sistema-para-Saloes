@@ -35,6 +35,7 @@ public class GetSalaoConverter {
         getSalaoDTO.setSalao_cnpj(salaoEntity.getSalao_cnpj());
         getSalaoDTO.setSalao_telefone(salaoEntity.getSalao_telefone());
         getSalaoDTO.setSalao_email(salaoEntity.getSalao_email());
+        getSalaoDTO.setSalao_senha(salaoEntity.getSalao_senha());
         getSalaoDTO.setBairro(salaoEntity.getEndereco_endereco_id().endereco_bairro);
         getSalaoDTO.setRua(salaoEntity.getEndereco_endereco_id().endereco_rua);
         getSalaoDTO.setNumero(salaoEntity.endereco_endereco_id.endereco_numero);

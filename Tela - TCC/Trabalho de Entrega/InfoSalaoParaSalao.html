@@ -1,0 +1,47 @@
+<!doctype html>
+<html lang="pt-br">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta1/dist/css/bootstrap.min.css" rel="stylesheet">
+  <title>Salão</title>
+</head>
+<body  style="background-color: #e6dee3;" onload="loadSalao()" >
+    <section>
+        <div class="container py-5 h-100 ">
+            <div class="row d-flex justify-content-center align-items-center h-100">
+                <div class="col-12 col-md-8 col-lg-6 col-xl-7">
+                    <div class="card shadow-2-strong" style="border-radius: 1rem;">
+                        <div class="card-body p-5 text-center">
+                            <h2>Informaçoes da Conta</h2>
+                              <br>
+                              <label for="nomeSalao" class="form-label">Nome do Salão</label>
+                              <input type="text" class="form-control" id="salaoNome" placeholder="" readonly>
+                              <br>
+                              <label for="cnpjSalao" class="form-label">CNPJ</label>
+                              <input type="text" class="form-control" id="salaoCNPJ" placeholder="" readonly>
+                              <br>
+                              <label for="emailSalao" class="form-label">Telefone</label>
+                              <input type="email" class="form-control" id="salaoTelefone" placeholder="" readonly>
+                              <br>
+                              <label for="estadoSalao" class="form-label">Email</label>
+                              <input type="text" class="form-control" id="salaoEmail" placeholder="" readonly>
+                              <br>
+                              <label for="cidadeSalao" class="form-label">Senha</label>
+                              <input type="text" class="form-control" id="salaoSenha" placeholder="" readonly>
+                              <br>
+                              <div class="d-flex justify-content-between">
+                                <div>
+                                    <button type="button" class="btn btn-primary" onclick="irEditarSalao()">Editar Dados</button>
+                                </div>
+                            <button type="button" class="btn btn-danger" onclick="votarTelaInicioSalao()">Voltar</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>    
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta1/dist/js/bootstrap.bundle.min.js"></script>
+<script src="GetSalaoInfo.js"></script>
+</body>
+</html>

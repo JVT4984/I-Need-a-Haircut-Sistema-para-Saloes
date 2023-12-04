@@ -6,6 +6,7 @@ public class GetSalaoDTO {
     public String salao_cnpj;
     public String salao_telefone;
     public String salao_email;
+    public String salao_senha;
     public String bairro;
     public String rua;
     public String numero;
@@ -48,6 +49,14 @@ public class GetSalaoDTO {
         this.salao_email = salao_email;
     }
 
+    public String getSalao_senha() {
+        return salao_senha;
+    }
+
+    public void setSalao_senha(String salao_senha) {
+        this.salao_senha = salao_senha;
+    }
+
     public String getBairro() {
         return bairro;
     }
@@ -88,11 +97,12 @@ public class GetSalaoDTO {
         this.estado = estado;
     }
 
-    public GetSalaoDTO(String salao_nome, String salao_cnpj, String salao_telefone, String salao_email, String bairro, String rua, String numero, String cidade, String estado) {
+    public GetSalaoDTO(String salao_nome, String salao_cnpj, String salao_telefone, String salao_email, String salao_senha, String bairro, String rua, String numero, String cidade, String estado) {
         this.salao_nome = salao_nome;
         this.salao_cnpj = salao_cnpj;
         this.salao_telefone = salao_telefone;
         this.salao_email = salao_email;
+        this.salao_senha = salao_senha;
         this.bairro = bairro;
         this.rua = rua;
         this.numero = numero;

@@ -123,4 +123,13 @@ public class AgendaPedidoDAO {
             }
         }
     }
+
+    public AgendaPedidoEntity excluirPedidobyCliente(int cliente_id) throws SQLException {
+        String sql = "delete from agdpedidodoservico where cliente_cliente_id = ?";
+        try (PreparedStatement preparedStatement = ConnectionSingleton.getConnection().prepareStatement(sql)) {
+            preparedStatement.setInt(1, cliente_id);
+            preparedStatement.executeUpdate();
+        }
+        return null;
+    }
 }
