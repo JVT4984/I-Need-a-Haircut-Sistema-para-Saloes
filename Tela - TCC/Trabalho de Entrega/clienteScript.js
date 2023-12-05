@@ -13,10 +13,11 @@ function editarCliente() {
 
     let nome = document.getElementById("nomeCliente").value;
     let sobrenome = document.getElementById("sobrenomeCliente").value;
-    let email = document.getElementById("emailCliente").value;
     let cpf = document.getElementById("cpfCliente").value;
-    let senha = document.getElementById("senhaCliente").value;
     let telefone = document.getElementById("telefoneCliente").value;
+    let email = document.getElementById("emailCliente").value;
+    let senha = document.getElementById("senhaCliente").value;
+    
 
     // Verificar se todos os campos estão preenchidos
     if (!nome || !sobrenome || !email || !cpf || !senha || !telefone) {
@@ -31,7 +32,7 @@ function editarCliente() {
         let submitButton = document.querySelector('button[type="submit"]');
         //submitButton.disabled = true; COMENTARIO PARA TIRAR
 
-        putCliente(nome, sobrenome, email, senha, cpf, telefone).then(cliente => {
+        putCliente(nome, sobrenome, cpf, telefone, email, senha).then(cliente => {
             const modalSucesso = new bootstrap.Modal(document.getElementById('modalSucesso'), {})
             modalSucesso.show();
             spinner.style.display = "none";  // Ocultar o spinner
