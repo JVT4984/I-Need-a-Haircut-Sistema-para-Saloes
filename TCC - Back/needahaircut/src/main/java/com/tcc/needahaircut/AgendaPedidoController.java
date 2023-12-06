@@ -8,6 +8,7 @@ import org.springframework.web.bind.annotation.*;
 import java.sql.Date;
 import java.sql.SQLException;
 import java.sql.Time;
+import java.util.List;
 
 @RestController
 @RequestMapping("/agendaPedido/")
@@ -83,6 +84,12 @@ public class AgendaPedidoController {
         }
 
         return ResponseEntity.ok().body(agendaPedidoConverter.converterToDTO(agendaPedidoEntity));
+    }
+
+    @GetMapping("servicoAgenda")
+    @CrossOrigin(origins = "*")
+    public List<ServicoEntity> getServicoID_Nome() throws SQLException {
+        return ServicoDAO.getServicosAgenda();
     }
 }
 

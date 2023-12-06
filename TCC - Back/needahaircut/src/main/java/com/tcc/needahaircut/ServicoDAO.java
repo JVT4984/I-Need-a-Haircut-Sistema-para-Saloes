@@ -25,6 +25,22 @@ public class ServicoDAO {
         }
     }
 
+    public static List<ServicoEntity> getServicosAgenda() throws SQLException {
+        String sql = "select servico_id, servico_nome from servico;";
+        try (Statement statement = ConnectionSingleton.getConnection().createStatement()) {
+            try (ResultSet rs = statement.executeQuery(sql)) {
+                List<ServicoEntity> servicos = new ArrayList<>();
+                while (rs.next()) {
+                    ServicoEntity servico = new ServicoEntity();
+                    servico.servico_id = rs.getInt(1);
+                    servico.servico_nome = rs.getString(2);
+                    servicos.add(servico);
+                }
+                return servicos;
+            }
+        }
+    }
+
     public static ServicoEntity getServicobyNome(String nomeServico) throws SQLException {
         final String sql = "select servico_id from servico where servico_nome = ?";
         try (PreparedStatement preparedStatement = ConnectionSingleton.getConnection().prepareStatement(sql)) {
