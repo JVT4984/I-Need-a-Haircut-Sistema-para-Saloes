@@ -20,12 +20,6 @@ public class SalaoController {
         return SalaoDAO.getSaloes();
     }
 
-   // @PostMapping("/salao/")
-   // public SalaoDTO postSalao(@RequestBody SalaoDTO salaoDTO) throws SQLException {
-    //    new SalaoDAO().postSalao(new SalaoEntity());
-   //     return salaoDTO;
- //   }
-
     @PutMapping("/salao/put")
     @CrossOrigin(origins = "*")
     public ResponseEntity<SalaoDTO> putCliente(@RequestBody SalaoDTO dto, @RequestHeader(HttpHeaders.AUTHORIZATION) String header) throws SQLException {
@@ -70,12 +64,4 @@ public class SalaoController {
         List<SalaoEntity> entities = new SalaoDAO().getSalaoByTeste();
         return converter.convertToDtoTeste(entities);
     }
-
-   // @DeleteMapping("/salao/{id}")
-  //  public SalaoDTO deletarSalao(@PathVariable("id") int id) throws SQLException {
-   //     SalaoDAO salaoDAO = new SalaoDAO();
-   //     SalaoDTO salao = SalaoDAO.getSalaoByID(id);
-    //    salaoDAO.deleteSalao(id);
-    //    return salao;
-  //  }
 }
