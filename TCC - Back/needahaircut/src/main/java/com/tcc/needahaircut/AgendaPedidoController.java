@@ -22,6 +22,7 @@ public class AgendaPedidoController {
     @PostMapping()
     @CrossOrigin(origins = "*")
     public ResponseEntity<AgendaPedidoDTO> postPedido(@RequestBody AgendaPedidoDTO dto) throws SQLException {
+
         AgendaPedidoConverter converter = agendaPedidoConverter;
         AgendaPedidoDTO agendaPedidoDTO = converter.converterToDTO(agendaPedidoDao.postAgendameto(converter.convertToEntity(dto)));
         return ResponseEntity.ok(agendaPedidoDTO);
