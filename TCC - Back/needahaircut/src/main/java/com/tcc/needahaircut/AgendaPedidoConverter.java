@@ -23,6 +23,24 @@ public class AgendaPedidoConverter {
         return agendaPedidoEntity;
     }
 
+    public AgendaPedidoEntity convertToEntityPost(int clienteID, int agendaID, int servicoID) {
+        AgendaPedidoEntity agendaPedidoEntity = new AgendaPedidoEntity();
+
+        ClienteEntity clienteEntity = new ClienteEntity();
+        clienteEntity.setCliente_id(clienteID);
+        agendaPedidoEntity.setCliente_id(clienteEntity);
+
+        ServicoEntity servicoEntity = new ServicoEntity();
+        servicoEntity.setServico_id(servicoID);
+        agendaPedidoEntity.setServico_id(servicoEntity);
+
+        AgendaEntity agendaEntity = new AgendaEntity();
+        agendaEntity.setAgenda_id(agendaID);
+        agendaPedidoEntity.setAgenda_id(agendaEntity);
+
+        return agendaPedidoEntity;
+    }
+
     public AgendaPedidoDTO converterToDTO(AgendaPedidoEntity agendaPedidoEntity) {
         AgendaPedidoDTO agendaPedidoDTO = new AgendaPedidoDTO();
         agendaPedidoDTO.setAgendamento_id(agendaPedidoEntity.getAgendamento_id());
@@ -32,10 +50,21 @@ public class AgendaPedidoConverter {
 
         return agendaPedidoDTO;
     }
+
+    public AgendaPedidoDTO convertToDTOpost(int clienteID, int agendaID, int servicoID) {
+        AgendaPedidoDTO agendaPedidoDTO = new AgendaPedidoDTO();
+        agendaPedidoDTO.setCliente_id(clienteID);
+        agendaPedidoDTO.setAgenda_id(agendaID);
+        agendaPedidoDTO.setServico_id(servicoID);
+
+        return agendaPedidoDTO;
+    }
     public AgendaPedidoEntity coverterToEntityAgenda(AgendaDTO agendaDTO) {
         AgendaPedidoEntity agendaPedidoEntity = new AgendaPedidoEntity();
         agendaPedidoEntity.setAgendamento_id(agendaDTO.getAgenda_id());
 
         return agendaPedidoEntity;
     }
+
+
 }

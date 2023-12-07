@@ -11,7 +11,7 @@ function carregarAgendamentoServico() {
                     gruposAdicionados.push(servico.servico_id);
                     // criando um novo card e colocando no botão 'comparar' que eu quero passar por parâmetro
                     row.innerHTML += `
-                    <option>${servico.servico_id}  ${servico.servico_nome}</option>`;
+                    <option>${servico.servico_nome}</option>`;
                 }
             });
         }) 
@@ -24,40 +24,21 @@ function carregarAgendamentoServico() {
     carregarAgendamentoServico();
 }
 
-async function getAgendaID(data, hora) {
-    let response = await fetch("http://localhost:8080/agendaPedido/agenda", {
-        headers: {
-            'Accept': 'application/json',
-            'Content-Type': 'application/json',
-            },
-            body: JSON.stringify ({
-                data: data,
-                horario:hora
-            })
-    });
-        
-    let id = await response.json();
-
-    return id;
-
-}
-
-async function postAgendamento(cliente, servico, agenda) {
+async function postAgendamento(servico, data, hora) {
     let response = await fetch("http://localhost:8080/agendaPedido/", {
         method: "POST",
         headers: {
             'Accept': 'application/json',
-            'Content-Type': 'application/json'
+            'Content-Type': 'application/json',
+            'Authorization': localStorage.getItem("token")
         },
         body: JSON.stringify ({
-            cliente_id: cliente,
-            servico_id: servico,
-            agenda_id: agenda,
+            servico_nome: servico,
+	        data: data,
+	        horario: hora
         })
     });
     let agendamento = await response.json();
-    
-    //console.log(pessoas);
     
     return agendamento;
     }

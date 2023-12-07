@@ -31,12 +31,7 @@
       
                   <h3 class="mb-5">Agendar Horário</h3>
       
-                  <form>
-                      <div class="form-outline mb-4">
-                        <label class="form-label" for="typeEmailX-2">Nome do Cliente</label>
-                        <input type="text" id="cliente-agenda" class="form-control form-control-lg" required />
-                      </div>
-          
+                  <form novalidate onsubmit="salvarAgendamento(event)">
                       <div class="form-outline mb-4">
                         <label class="form-label" for="typePasswordX-2">Serviço</label>
                         <select class="form-select form-control form-control-lg" id="servico-agenda" required>
@@ -61,14 +56,16 @@
                           <label class="form-label" for="typePasswordX-2">Horário</label>
                           <select class="form-select form-control form-control-lg" id="hora-agenda" required>
                                 <option ></option>
+                                <option >12:30:00</option>
                                 <option >13:30:00</option>
                                 <option >14:30:00</option>
                             </select>
                         </div>
       
-                    <div class="spinner-border" role="status" id="spinner">
-                      <span class="visually-hidden">Loading...</span>
+                      <div class="spinner-border" role="status" id="spinner" style="display: none;">
+                        <span class="visually-hidden">Loading...</span>
                     </div>
+                      
                   <button onclick="salvarAgendamento()" class="btn btn-primary btn-lg btn-block">Agendar</button>
                   <button class="btn btn-danger btn-lg btn-block">Cancelar</button>
               
@@ -80,12 +77,64 @@
         </div>
       </section>
 
+    </div>
+    <div class="modal" tabindex="-1" id="modalSucessoAgenda">
+      <div class="modal-dialog">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h5 class="modal-title">Sucesso</h5>
+            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+          </div>
+          <div class="modal-body">
+            <p>Seu agendamento foi efetuado com sucesso.</p>
+          </div>
+          <div class="modal-footer">
+            <button onclick="Reload()" type="button" class="btn btn-secondary" data-bs-dismiss="modal">Ok</button>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="modal" tabindex="-1" id="modalErroAgenda">
+      <div class="modal-dialog">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h5 class="modal-title">Atenção</h5>
+            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+          </div>
+          <div class="modal-body">
+            <p>Preencha todos os campos corretamente.</p>
+          </div>
+          <div class="modal-footer">
+            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Ok</button>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="modal" tabindex="-1" id="modalAgendaIndisponivel">
+      <div class="modal-dialog">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h5 class="modal-title">Atenção</h5>
+            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+          </div>
+          <div class="modal-body">
+            <p>O horário selecionado não esta disponivel.</p>
+          </div>
+          <div class="modal-footer">
+            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Ok</button>
+          </div>
+        </div>
+      </div>
+    </div>
+
+
       <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
       <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.1.3/js/bootstrap.min.js"></script>
       <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.9.0/js/bootstrap-datepicker.min.js"></script>
       <script src="scriptAgenda.js"></script>
       <script src="styleAgenda.css"></script>
-      <script src="script.js"></script>
       <script src="agenda-api.js"></script>
   </body>
 </html>

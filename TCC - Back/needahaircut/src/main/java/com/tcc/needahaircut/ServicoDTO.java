@@ -14,9 +14,7 @@ public class ServicoDTO {
 
     }
 
-    public int getServico_id() {
-        return servico_id;
-    }
+    public int getServico_id() {return servico_id;}
 
     public void setServico_id(int servico_id) {
         this.servico_id = servico_id;
