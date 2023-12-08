@@ -1,8 +1,8 @@
-$(function(){
+$(function () {
     $('#datepicker').datepicker({
         format: 'yyyy-mm-dd'
     });
-  });
+});
 
 function salvarAgendamento(event) {
 
@@ -14,7 +14,7 @@ function salvarAgendamento(event) {
 
     if (!servico || !data || !hora) {
         const modalErro = new bootstrap.Modal(document.getElementById('modalErroAgenda'), {})
-            modalErro.show();
+        modalErro.show();
         return;
     } else {
         let spinner = document.getElementById("spinner");
@@ -28,5 +28,5 @@ function salvarAgendamento(event) {
             spinner.style.display = "none";
         })
     }
-    
+
 }

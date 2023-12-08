@@ -125,7 +125,7 @@ public class AgendaPedidoController {
             return ResponseEntity.status(HttpStatus.UNAUTHORIZED).build();
         }
 
-
+        return ResponseEntity.ok(GetAgendaClienteConverter.convertToDTOCliente(agendaPedidoDao.getAgendaCliente(clienteID)));
     }
 
 }

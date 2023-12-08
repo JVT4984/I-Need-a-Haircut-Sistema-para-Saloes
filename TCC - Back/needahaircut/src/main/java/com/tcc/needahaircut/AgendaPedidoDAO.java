@@ -153,7 +153,7 @@ public class AgendaPedidoDAO {
         return null;
     }
 
-    public List<AgendaPedidoEntity> getAgendaCliente(String token) throws SQLException {
+    public List<AgendaPedidoEntity> getAgendaCliente(int idCliente) throws SQLException {
         List<AgendaPedidoEntity> agendamento = new ArrayList<>();
         try (PreparedStatement preparedStatement = ConnectionSingleton.getConnection().prepareStatement(
                 "SELECT agdpedidodoservico.agendamento_id, cliente.cliente_id, cliente.cliente_nome, servico.servico_nome, servico.servico_valor, agenda.agenda_data, agenda.hrInicio " +
@@ -162,7 +162,7 @@ public class AgendaPedidoDAO {
                         "INNER JOIN servico ON agdpedidodoservico.servico_servico_id = servico.servico_id " +
                         "INNER JOIN agenda ON agdpedidodoservico.agenda_agenda_id = agenda.agenda_id " +
                         "Where cliente_cliente_id = ?")) {
-            preparedStatement.setString(1, token);
+            preparedStatement.setInt(1, idCliente);
             try (ResultSet rs = preparedStatement.executeQuery()) {
                 while (rs.next()) {
                     AgendaPedidoEntity pedido = new AgendaPedidoEntity();

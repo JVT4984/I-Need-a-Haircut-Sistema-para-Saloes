@@ -9,7 +9,7 @@ public class GetAgendamentoClienteDTO {
     public int agendaCliente_id;
     public String cliente_nome;
     public String servico_nome;
-    public String servico_valor;
+    public Double servico_valor;
     public LocalDate agenda_data;
     public LocalTime agenda_hora;
 
@@ -19,7 +19,7 @@ public class GetAgendamentoClienteDTO {
     }
 
 
-    public GetAgendamentoClienteDTO(int agendamento_id, int agendaCliente_id, String cliente_nome, String servico_nome, String servico_valor, LocalDate agenda_data, LocalTime agenda_hora) {
+    public GetAgendamentoClienteDTO(int agendamento_id, int agendaCliente_id, String cliente_nome, String servico_nome, Double servico_valor, LocalDate agenda_data, LocalTime agenda_hora) {
         this.agendamento_id = agendamento_id;
         this.agendaCliente_id = agendaCliente_id;
         this.cliente_nome = cliente_nome;
@@ -61,11 +61,11 @@ public class GetAgendamentoClienteDTO {
         this.servico_nome = servico_nome;
     }
 
-    public String getServico_valor() {
+    public Double getServico_valor() {
         return servico_valor;
     }
 
-    public void setServico_valor(String servico_valor) {
+    public void setServico_valor(Double servico_valor) {
         this.servico_valor = servico_valor;
     }
 

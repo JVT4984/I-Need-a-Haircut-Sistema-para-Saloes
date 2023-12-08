@@ -44,3 +44,34 @@ async function postAgendamento(servico, data, hora) {
     }
 
 window.onload = carregarTudoAgendamento;
+
+async function getAgendaCliente() {
+    let response = await fetch("http://localhost:8080/agendaPedido/clienteAgenda", {
+        headers: {
+            'Accept': 'application/json',
+            'Content-Type': 'application/json',
+            'Authorization': localStorage.getItem("token")
+            }
+    });
+        
+    let agendaCliente = await response.json();
+
+    return agendaCliente;
+
+}
+
+async function deleteagendamento(id) {
+    let response = await fetch("http://localhost:8080/agendaPedido/" + id, {
+        method: "DELETE",
+        headers: {
+            'Accept': 'application/json',
+            'Content-Type': 'application/json',
+            'Authorization': localStorage.getItem("token")
+        },
+    });
+    let agenda = await response.json();
+
+    
+
+    return agenda;
+}
