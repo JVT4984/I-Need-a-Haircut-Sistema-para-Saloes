@@ -30,3 +30,12 @@ function salvarAgendamento(event) {
     }
 
 }
+
+function voltarTelaInicial() {
+    document.location.href = 'Tela Inicial.html'
+  }
+
+function irTelaAgenda() {
+document.location.href = 'TelaAgendaCliente.html'
+  }
+  

@@ -71,4 +71,8 @@ function votarTelaInicioSalao() {
     document.location.href = 'TelaSalão.html'
 }
 
+function voltarEditar() {
+    document.location.href = 'InfoSalaoParaSalao.html'
+}
+
 

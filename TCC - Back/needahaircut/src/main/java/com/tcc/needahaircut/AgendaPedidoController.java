@@ -128,5 +128,17 @@ public class AgendaPedidoController {
         return ResponseEntity.ok(GetAgendaClienteConverter.convertToDTOCliente(agendaPedidoDao.getAgendaCliente(clienteID)));
     }
 
+    @GetMapping("salaoAgenda")
+    @CrossOrigin(origins = "*")
+    public ResponseEntity<List<GetAgendamentoClienteDTO>> getAgendaSalao(@RequestHeader(HttpHeaders.AUTHORIZATION)String header) throws SQLException {
+
+        int salaoID = loginDAO.tokenExisteSalao(header);
+        if (salaoID < 0) {
+            return ResponseEntity.status(HttpStatus.UNAUTHORIZED).build();
+        }
+
+        return ResponseEntity.ok(GetAgendaClienteConverter.convertToDTOCliente(agendaPedidoDao.getAgendaSalao()));
+    }
+
 }
 

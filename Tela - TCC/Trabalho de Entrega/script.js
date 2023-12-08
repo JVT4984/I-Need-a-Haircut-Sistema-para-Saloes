@@ -31,12 +31,12 @@ function salvar(event) {
             //submitButton.disabled = false; COMENTARIO PARA TIRAR
 
             // Limpar os campos do formulário
-            document.getElementById("validationCustom01").value = "";
-            document.getElementById("validationCustom02").value = "";
-            document.getElementById("validationCustomUsername").value = "";
-            document.getElementById("validationCustom03").value = "";
-            document.getElementById("validationCustom06").value = "";
-            document.getElementById("validationCustom05").value = "";
+            //document.getElementById("validationCustom01").value = "";
+            //document.getElementById("validationCustom02").value = "";
+           // document.getElementById("validationCustomUsername").value = "";
+           // document.getElementById("validationCustom03").value = "";
+           // document.getElementById("validationCustom06").value = "";
+            //document.getElementById("validationCustom05").value = "";
         })
     }
 }

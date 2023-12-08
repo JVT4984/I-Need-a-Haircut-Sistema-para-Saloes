@@ -185,4 +185,35 @@ public class AgendaPedidoDAO {
             }
         }
     }
+
+    public List<AgendaPedidoEntity> getAgendaSalao() throws SQLException {
+        List<AgendaPedidoEntity> agendamento = new ArrayList<>();
+        try (PreparedStatement preparedStatement = ConnectionSingleton.getConnection().prepareStatement(
+                "SELECT agdpedidodoservico.agendamento_id, cliente.cliente_id, cliente.cliente_nome, servico.servico_nome, servico.servico_valor, agenda.agenda_data, agenda.hrInicio " +
+                        "FROM agdpedidodoservico " +
+                        "INNER JOIN cliente ON agdpedidodoservico.cliente_cliente_id = cliente.cliente_id " +
+                        "INNER JOIN servico ON agdpedidodoservico.servico_servico_id = servico.servico_id " +
+                        "INNER JOIN agenda ON agdpedidodoservico.agenda_agenda_id = agenda.agenda_id ")) {
+            try (ResultSet rs = preparedStatement.executeQuery()) {
+                while (rs.next()) {
+                    AgendaPedidoEntity pedido = new AgendaPedidoEntity();
+                    ClienteEntity cliente = new ClienteEntity();
+                    ServicoEntity servico = new ServicoEntity();
+                    AgendaEntity agenda = new AgendaEntity();
+                    pedido.agendamento_id = rs.getInt(1);
+                    cliente.cliente_id = rs.getInt(2);
+                    cliente.cliente_nome = rs.getString(3);
+                    servico.servico_nome = rs.getString(4);
+                    servico.servico_valor = rs.getDouble(5);
+                    agenda.data = rs.getDate(6).toLocalDate();
+                    agenda.hrInicio = rs.getTime(7).toLocalTime();
+                    pedido.setCliente_id(cliente);
+                    pedido.setServico_id(servico);
+                    pedido.setAgenda_id(agenda);
+                    agendamento.add(pedido);
+                }
+                return agendamento;
+            }
+        }
+    }
 }

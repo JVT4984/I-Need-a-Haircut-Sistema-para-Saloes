@@ -45,3 +45,7 @@ function carregarSalao() {
         .catch(error => console.error('Erro:', error));
   }
   carregarSalao();
+
+  function voltarTelaInicial() {
+    document.location.href = 'Tela Inicial.html'
+  }

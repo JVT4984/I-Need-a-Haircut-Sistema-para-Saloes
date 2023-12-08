@@ -67,9 +67,13 @@
                     </div>
                       
                   <button onclick="salvarAgendamento()" class="btn btn-primary btn-lg btn-block">Agendar</button>
-                  <button class="btn btn-danger btn-lg btn-block">Cancelar</button>
-              
               </form>
+              <br>
+              <div class="container">
+                <div class="box">
+                  <button class="btn btn-danger btn-lg btn-block" onclick="voltarTelaInicial()">Cancelar</button>
+                </div>
+            </div>
                 </div>
               </div>
             </div>
@@ -89,7 +93,7 @@
             <p>Seu agendamento foi efetuado com sucesso.</p>
           </div>
           <div class="modal-footer">
-            <button onclick="Reload()" type="button" class="btn btn-secondary" data-bs-dismiss="modal">Ok</button>
+            <button onclick="irTelaAgenda()" type="button" class="btn btn-secondary" data-bs-dismiss="modal">Ok</button>
           </div>
         </div>
       </div>

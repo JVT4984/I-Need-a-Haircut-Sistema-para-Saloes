@@ -46,3 +46,7 @@ function cancelar(element) {
       tabela.deleteRow(trElement.rowIndex);
     })
   }
+
+  function voltarTelaInicial() {
+    document.location.href = 'Tela Inicial.html'
+  }

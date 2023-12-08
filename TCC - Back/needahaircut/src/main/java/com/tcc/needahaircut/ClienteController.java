@@ -81,4 +81,16 @@ public class ClienteController {
         }
         return ResponseEntity.ok().body(converter.toDTO(entity));
     }
+
+
+    @GetMapping("clienteSalao")
+    @CrossOrigin(origins = "*")
+    public ResponseEntity<List<ClienteEntity>> getClientesParaSalao(@RequestHeader(HttpHeaders.AUTHORIZATION) String header) throws SQLException {
+
+        int salaoID = loginDAO.tokenExisteSalao(header);
+        if (salaoID < 0) {
+            return ResponseEntity.status(HttpStatus.UNAUTHORIZED).build();
+        }
+        return ResponseEntity.ok(ClienteDAO.getCliente());
+    }
 }
