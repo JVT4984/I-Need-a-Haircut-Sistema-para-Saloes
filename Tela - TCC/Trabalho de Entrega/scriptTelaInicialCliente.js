@@ -49,3 +49,8 @@ function irAgendaCliente(){
 function irAgendar(){
     document.location.href = "AgendarHorario.html"
 }
+
+function SairConta(){
+  localStorage.removeItem('token')
+  document.location.href = "Login.html"
+}

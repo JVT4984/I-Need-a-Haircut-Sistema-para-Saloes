@@ -36,3 +36,8 @@ function carregarAgendaSalao() {
     .catch(error => console.error('Erro:', error));
 }
 carregarAgendaSalao();
+
+function SairConta(){
+    localStorage.removeItem('token')
+    document.location.href = "Login.html"
+}
